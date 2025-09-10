@@ -109,7 +109,10 @@
     /* Table styles */
     .table-wrapper {
       max-width: 900px; /* mas makitid yung table */
-      margin: 0 auto;   /* center yung table sa loob ng card */
+      margin-top: 20px; 
+      margin-bottom: 20px;
+      margin-right: 20px;
+      margin-left: 20px;
       overflow-x: auto;
   }
     table {
