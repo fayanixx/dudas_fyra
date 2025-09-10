@@ -4,135 +4,139 @@
     <meta charset="UTF-8">
     <title>User Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        /* Base styles */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            color: #374151;
-            background: #f8fafc;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            background-image: radial-gradient(at 0% 0%, hsla(216, 100%, 96%, 0.5) 0, transparent 50%),
-                              radial-gradient(at 100% 100%, hsla(270, 100%, 96%, 0.5) 0, transparent 50%);
-        }
-        
-        .container { width: 100%; max-width: 1000px; }
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 1.5rem;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
-            overflow: hidden;
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    /* Base styles */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: #374151;
+        background: linear-gradient(135deg, #dbeafe, #f5d0fe, #ede9fe);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
 
-        /* Card header and actions */
-        .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid #e5e7eb;
-            background: #f9fafb;
-        }
-        .title {
-            margin: 0;
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #1f2937;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .actions { display: flex; gap: 0.75rem; }
+    .container { width: 100%; max-width: 1000px; }
+    .card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px) saturate(150%);
+        border-radius: 1.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    }
 
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 1rem;
-            text-decoration: none;
-            border-radius: 0.75rem;
-            border: 1px solid transparent;
-            font-size: 0.875rem;
-            font-weight: 600;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        .btn i { font-size: 0.875rem; }
-        .btn:active { transform: scale(0.98); }
+    /* Card header */
+    .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        background: linear-gradient(to right, #6366f1, #a78bfa);
+        color: white;
+    }
+    .title {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    .actions { display: flex; gap: 0.75rem; }
 
-        .btn-primary {
-            background: #4f46e5;
-            color: #fff;
-            background-image: linear-gradient(to right, #6366f1, #4f46e5);
-        }
-        .btn-primary:hover {
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-            transform: translateY(-1px);
-        }
-        .btn-edit {
-            background: #10b981;
-            color: #fff;
-            background-image: linear-gradient(to right, #34d399, #10b981);
-        }
-        .btn-edit:hover {
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-            transform: translateY(-1px);
-        }
-        .btn-delete {
-            background: #ef4444;
-            color: #fff;
-            background-image: linear-gradient(to right, #f87171, #ef4444);
-        }
-        .btn-delete:hover {
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-            transform: translateY(-1px);
-        }
+    /* Buttons */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.65rem 1.25rem;
+        text-decoration: none;
+        border-radius: 2rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.25s ease-in-out;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .btn i { font-size: 0.9rem; }
+    .btn:active { transform: scale(0.96); }
 
-        /* Table styles */
-        .table-wrapper { overflow-x: auto; }
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-        th, td { padding: 1rem 1.5rem; text-align: left; font-size: 0.9375rem; }
-        th {
-            background: #4f46e5;
-            color: #fff;
-            font-weight: 600;
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
-        th:first-child { border-top-left-radius: 1.5rem; }
-        th:last-child { border-top-right-radius: 1.5rem; }
-        
-        tr { transition: background-color 0.2s ease; }
-        tr:nth-child(even) td { background: #f9fafb; }
-        tr:nth-child(odd) td { background: #fff; }
-        tr:hover td { background: #eef2ff; }
+    .btn-primary {
+        background: linear-gradient(135deg, #6366f1, #4f46e5);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+    .btn-primary:hover {
+        box-shadow: 0 6px 18px rgba(99, 102, 241, 0.6);
+        transform: translateY(-2px);
+    }
+    .btn-edit {
+        background: linear-gradient(135deg, #34d399, #059669);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+    .btn-edit:hover {
+        box-shadow: 0 6px 18px rgba(16, 185, 129, 0.6);
+        transform: translateY(-2px);
+    }
+    .btn-delete {
+        background: linear-gradient(135deg, #f87171, #dc2626);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+    }
+    .btn-delete:hover {
+        box-shadow: 0 6px 18px rgba(239, 68, 68, 0.6);
+        transform: translateY(-2px);
+    }
 
-        td:last-child { display: flex; justify-content: center; gap: 0.75rem; }
+    /* Table styles */
+    .table-wrapper { overflow-x: auto; }
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+    th, td { padding: 1rem 1.5rem; text-align: center; font-size: 0.95rem; }
+    th {
+        background: linear-gradient(135deg, #6366f1, #a78bfa);
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    th:first-child { border-top-left-radius: 1.5rem; }
+    th:last-child { border-top-right-radius: 1.5rem; }
+    
+    tr { transition: background-color 0.25s ease, transform 0.2s ease; }
+    tr:nth-child(even) td { background: rgba(243, 244, 246, 0.7); }
+    tr:nth-child(odd) td { background: rgba(255, 255, 255, 0.7); }
+    tr:hover td { background: rgba(224, 231, 255, 0.8); transform: scale(1.01); }
 
-        /* Empty state */
-        .empty {
-            padding: 2rem;
-            text-align: center;
-            color: #6b7280;
-            font-style: italic;
-            background: #fff;
-            border-bottom-left-radius: 1.5rem;
-            border-bottom-right-radius: 1.5rem;
-        }
-    </style>
+    td:last-child { display: flex; justify-content: center; gap: 0.75rem; }
+
+    /* Empty state */
+    .empty {
+        padding: 2rem;
+        text-align: center;
+        color: #6b7280;
+        font-style: italic;
+        background: rgba(255,255,255,0.6);
+        border-bottom-left-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+    }
+</style>
+
 </head>
 <body>
     <div class="container">
