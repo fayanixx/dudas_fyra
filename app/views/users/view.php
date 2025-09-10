@@ -164,7 +164,7 @@
                                     <td><?= $user['email'] ?></td>
                                     <td>
                                         <a href="<?= site_url('users/update/' . $user['id']) ?>" class="btn btn-edit">
-                                            <i class="fa-solid fa-pen"></i> Edit
+                                          <i class="fa-solid fa-pen"></i> Update
                                         </a>
                                         <a href="<?= site_url('users/delete/' . $user['id']) ?>" 
                                             class="btn btn-delete" 
