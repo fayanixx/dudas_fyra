@@ -163,7 +163,7 @@
                                     <td><?= $user['username'] ?></td>
                                     <td><?= $user['email'] ?></td>
                                     <td>
-                                        <a href="<?= site_url('users/edit/' . $user['id']) ?>" class="btn btn-edit">
+                                        <a href="<?= site_url('users/update/' . $user['id']) ?>" class="btn btn-edit">
                                             <i class="fa-solid fa-pen"></i> Edit
                                         </a>
                                         <a href="<?= site_url('users/delete/' . $user['id']) ?>" 
