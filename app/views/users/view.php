@@ -19,7 +19,12 @@
         padding: 2rem;
     }
 
-    .container { width: 100%; max-width: 1000px; }
+      .container {
+          width: 100%;
+          max-width: 1200px; /* mas malapad yung card */
+          margin: auto;
+      }
+
     .card {
         background: rgba(255, 255, 255, 0.7);
         backdrop-filter: blur(20px) saturate(150%);
@@ -102,7 +107,11 @@
     }
 
     /* Table styles */
-    .table-wrapper { overflow-x: auto; }
+    .table-wrapper {
+      max-width: 900px; /* mas makitid yung table */
+      margin: 0 auto;   /* center yung table sa loob ng card */
+      overflow-x: auto;
+  }
     table {
         width: 100%;
         border-collapse: separate;
