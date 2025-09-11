@@ -25,6 +25,7 @@
       }
 
     .card {
+        align-items: center;
         background: rgba(255, 255, 255, 0.7);
         backdrop-filter: blur(20px) saturate(150%);
         border-radius: 1.75rem;
