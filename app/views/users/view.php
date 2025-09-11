@@ -18,10 +18,9 @@
         justify-content: center;
         padding: 2rem;
     }
-
       .container {
           width: 100%;
-          max-width: 1200px; /* mas malapad yung card */
+          max-width: 1300px; /* mas malapad yung card */
           margin: auto;
       }
 
@@ -46,7 +45,7 @@
         justify-content: space-between;
         padding: 1.5rem 2rem;
         border-bottom: 1px solid rgba(0,0,0,0.05);
-        background: linear-gradient(to right, #6366f1, #a78bfa);
+        background: linear-gradient(170deg, #7577f5ff, #15034dff);
         color: white;
     }
     .title {
@@ -57,7 +56,7 @@
         align-items: center;
         gap: 0.75rem;
     }
-    .actions { display: flex; gap: 0.75rem; }
+    .actions { display: flex; gap: 0.85rem; }
 
     /* Buttons */
     .btn {
@@ -109,8 +108,8 @@
     /* Table styles */
     .table-wrapper {
       max-width: 900px; /* mas makitid yung table */
-      margin-top: 20px; 
-      margin-bottom: 20px;
+      margin-top: 30px; 
+      margin-bottom: 30px;
       margin-right: 20px;
       margin-left: 20px;
       overflow-x: auto;
@@ -152,6 +151,7 @@
 </head>
 <body>
     <div class="container">
+        <h1>User Management</h1>
         <div class="card">
             <div class="card-header">
                 <h1 class="title"><i class="fa-solid fa-users"></i> User Directory</h1>
