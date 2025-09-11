@@ -152,7 +152,6 @@
 </head>
 <body>
     <div class="container">
-        <h1>User Management</h1>
         <div class="card">
             <div class="card-header">
                 <h1 class="title"><i class="fa-solid fa-users"></i> User Directory</h1>
