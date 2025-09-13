@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-    /* New color theme: black, gray, navy blue, light gray */
-
     /* Base styles */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
