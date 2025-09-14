@@ -1,208 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>User Management</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>User Management System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
+/* --- Palette Variables --- */
+:root {
+    --raisin-black: #2D2728ff;
+    --van-dyke: #3F3735ff;
+    --silver: #C7C2BFff;
+    --jet: #383232ff;
+    --davys-gray: #5F5957ff;
+    --black: #040202ff;
+    --smoky-black: #0F0C0Cff;
+    --licorice: #1F1A1Aff;
+    --raisin-black-2: #282222ff;
+    --platinum: #EAE8E5ff;
+    --white: #FFFFFFff;
+}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        color: #A0AEC0; /* Light gray text */
-        background: linear-gradient(135deg, #171A21, #2C3E50); /* Dark gray to navy gradient */
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-    }
-    .container {
-        width: 100%;
-        max-width: 1300px;
-        margin: auto;
-    }
+/* --- Reset & Base --- */
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--silver);
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
 
-    .card {
-        align-items: center;
-        background: rgba(26, 32, 44, 0.8); /* Semi-transparent black */
-        backdrop-filter: blur(20px) saturate(150%);
-        border-radius: 1.75rem;
-        border: 1px solid rgba(160, 174, 192, 0.4); /* Light gray border */
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-    }
+/* Overlay for readability */
+body::before {
+    content:'';
+    position: fixed;
+    inset: 0;
+    background: rgba(45,39,40,0.75); /* Raisin Black overlay */
+    z-index: -1;
+}
 
-    /* Card header */
-    .card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1.5rem 2rem;
-        border-bottom: 1px solid rgba(0,0,0,0.2);
-        background: linear-gradient(170deg, #2C5282, #1A202C); /* Navy blue to dark gray gradient */
-        color: white;
-    }
-    .title {
-        margin: 0;
-        font-size: 1.8rem;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-    }
-    .actions { display: flex; gap: 0.85rem; }
+/* --- Main Title --- */
+h1.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--white);
+    text-shadow: 1px 1px 15px rgba(0,0,0,0.6);
+    margin-bottom: 2rem;
+}
 
-    /* Buttons */
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.65rem 1.25rem;
-        text-decoration: none;
-        border-radius: 2rem;
-        font-size: 0.9rem;
-        font-weight: 600;
-        transition: all 0.25s ease-in-out;
-        border: none;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
-    .btn i { font-size: 0.9rem; }
-    .btn:active { transform: scale(0.96); }
+/* --- Container --- */
+.container { width: 100%; max-width: 1200px; }
 
-    .btn-primary {
-        background: linear-gradient(135deg, #2C5282, #2B6CB0); /* Navy blue gradient */
-        color: #E2E8F0; /* Light gray */
-        box-shadow: 0 4px 12px rgba(44, 82, 128, 0.4);
-    }
-    .btn-primary:hover {
-        box-shadow: 0 6px 18px rgba(44, 82, 128, 0.6);
-        transform: translateY(-2px);
-    }
-    .btn-edit {
-        background: #4A5568; /* Dark gray */
-        color: #E2E8F0; /* Light gray */
-        box-shadow: 0 4px 12px rgba(74, 85, 104, 0.4);
-    }
-    .btn-edit:hover {
-        background: #2D3748; /* Slightly darker gray */
-        box-shadow: 0 6px 18px rgba(74, 85, 104, 0.6);
-        transform: translateY(-2px);
-    }
-    .btn-delete {
-        background: #9B2C2C; /* Muted red for delete */
-        color: #E2E8F0; /* Light gray */
-        box-shadow: 0 4px 12px rgba(155, 44, 44, 0.4);
-    }
-    .btn-delete:hover {
-        background: #7B2424; /* Darker red */
-        box-shadow: 0 6px 18px rgba(155, 44, 44, 0.6);
-        transform: translateY(-2px);
-    }
+/* --- Card --- */
+.card {
+    background: rgba(63,55,53,0.85); /* Van Dyke */
+    border-radius: 2rem;
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.45);
+}
 
-    /* Table styles */
-    .table-wrapper {
-      max-width: 900px;
-      margin-top: 30px;
-      margin-bottom: 30px;
-      margin-right: 20px;
-      margin-left: 20px;
-      overflow-x: auto;
-  }
-    table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-    }
-    th, td { padding: 1rem 1.5rem; text-align: center; font-size: 0.95rem; }
-    th {
-        background: linear-gradient(135deg, #2B6CB0, #4A5568); /* Navy blue to gray gradient */
-        color: #E2E8F0; /* Light gray */
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
-    th:first-child { border-top-left-radius: 1.5rem; }
-    th:last-child { border-top-right-radius: 1.5rem; }
+/* --- Card Header --- */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: var(--jet);
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--white);
+    border-bottom: 1px solid rgba(199,194,191,0.3); /* Silver */
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
+.actions a {
+    text-decoration: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 1.5rem;
+    font-weight: 500;
+    color: var(--silver);
+    background: var(--davys-gray);
+    transition: all 0.25s ease;
+}
+.actions a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.35);
+}
 
-    tr { transition: background-color 0.25s ease, transform 0.2s ease; }
-    tr:nth-child(even) td { background: rgba(45, 55, 72, 0.6); } /* Dark gray */
-    tr:nth-child(odd) td { background: rgba(26, 32, 44, 0.6); } /* Black */
-    tr:hover td { background: rgba(44, 82, 128, 0.8); transform: scale(1.01); } /* Navy blue hover */
+/* --- Table Wrapper --- */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 1.5rem;
+}
 
-    td:last-child { display: flex; justify-content: center; gap: 0.75rem; }
+/* --- Table --- */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+th, td {
+    padding: 1rem 1.5rem;
+    text-align: center;
+    transition: all 0.2s;
+}
+th {
+    background: var(--raisin-black);
+    color: var(--white);
+    font-weight: 600;
+}
+tr:nth-child(even) td {
+    background: rgba(56,50,50,0.55); /* Jet */
+}
+tr:nth-child(odd) td {
+    background: rgba(63,55,53,0.55); /* Van Dyke */
+}
+tr:hover td {
+    background: var(--jet);
+    transform: scale(1.01);
+}
+td:last-child {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
 
-    /* Empty state */
-    .empty {
-        padding: 2rem;
-        text-align: center;
-        color: #A0AEC0; /* Light gray */
-        font-style: italic;
-        background: rgba(26, 32, 44, 0.7); /* Semi-transparent black */
-        border-bottom-left-radius: 1.5rem;
-        border-bottom-right-radius: 1.5rem;
-    }
+/* --- Action Buttons --- */
+.btn-edit, .btn-delete {
+    padding: 0.4rem 0.9rem;
+    border-radius: 1rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.btn-edit {
+    background: var(--davys-gray);
+    color: var(--white);
+}
+.btn-edit:hover { background: var(--jet); }
+.btn-delete {
+    background: #9B2C2C; /* Red delete */
+    color: var(--white);
+}
+.btn-delete:hover { background: #7B2424; }
+
+/* --- Empty State --- */
+.empty {
+    padding: 2rem;
+    text-align: center;
+    font-style: italic;
+    background: rgba(45,39,40,0.65); /* Raisin Black */
+    border-radius: 0 0 2rem 2rem;
+    color: var(--silver);
+    font-family: 'Poppins', sans-serif;
+}
 </style>
-
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h1 class="title"><i class="fa-solid fa-users"></i> User Directory</h1>
-                <div class="actions">
-                    <a href="<?= site_url('users/create') ?>" class="btn btn-primary">
-                        <i class="fa-solid fa-user-plus"></i> Add New User
-                    </a>
-                </div>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (!empty($users)): ?>
-                            <?php foreach($users as $user): ?>
-                                <tr>
-                                    <td><?= $user['id'] ?></td>
-                                    <td><?= $user['username'] ?></td>
-                                    <td><?= $user['email'] ?></td>
-                                    <td>
-                                        <a href="<?= site_url('users/update/' . $user['id']) ?>" class="btn btn-edit">
-                                          <i class="fa-solid fa-pen"></i> Update
-                                        </a>
-                                        <a href="<?= site_url('users/delete/' . $user['id']) ?>" 
-                                            class="btn btn-delete" 
-                                            onclick="return confirm('Are you sure you want to permanently delete this user? This action cannot be undone.')">
-                                            <i class="fa-solid fa-trash"></i> Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="4" class="empty">
-                                    <i class="fa-regular fa-circle-xmark"></i> No users found. Start by adding a new one!
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
+
+<h1 class="main-title"><i class="fa-solid fa-users"></i> User Management System</h1>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <span><i class="fa-solid fa-users"></i> User Directory</span>
+            <div class="actions">
+                <a href="<?= site_url('users/create') ?>"><i class="fa-solid fa-user-plus"></i> Add User</a>
             </div>
         </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php if(!empty($users)): ?>
+                    <?php foreach($users as $user): ?>
+                    <tr>
+                        <td><?= $user['id'] ?></td>
+                        <td><?= $user['username'] ?></td>
+                        <td><?= $user['email'] ?></td>
+                        <td>
+                            <a href="<?= site_url('users/update/'.$user['id']) ?>" class="btn-edit" title="Edit User"><i class="fa-solid fa-pen"></i></a>
+                            <a href="<?= site_url('users/delete/'.$user['id']) ?>" class="btn-delete" title="Delete User" onclick="return confirm('Are you sure?');"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="4" class="empty"><i class="fa-regular fa-circle-xmark"></i> No users found</td>
+                    </tr>
+                <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
+
 </body>
 </html>
