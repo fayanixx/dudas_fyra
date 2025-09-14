@@ -1,51 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Delete User</title>
-    <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #1f2937; background: linear-gradient(180deg, #fff1f2, #fee2e2); }
-        .bg-decor { position: fixed; inset: 0; z-index: -1; pointer-events: none; background:
-            radial-gradient(600px 600px at 0% 0%, rgba(244,63,94,.10), transparent 60%),
-            radial-gradient(600px 600px at 100% 0%, rgba(239,68,68,.10), transparent 60%),
-            radial-gradient(600px 600px at 0% 100%, rgba(248,113,113,.10), transparent 60%),
-            radial-gradient(600px 600px at 100% 100%, rgba(252,165,165,.10), transparent 60%);
-            animation: floatBg 16s ease-in-out infinite alternate; }
-        .container { max-width: 560px; margin: 80px auto; padding: 0 16px; }
-        .card { background: #fff; border: 1px solid #fee2e2; border-radius: 14px; box-shadow: 0 10px 30px rgba(2,6,23,.06); overflow: hidden; transform: translateY(8px); opacity: 0; animation: cardIn .6s ease-out forwards; }
-        .card-header { padding: 16px 20px; border-bottom: 1px solid #ffe4e6; }
-        h1 { margin: 0; font-size: 22px; color: #ef4444; }
-        .card-body { padding: 20px; animation: fadeIn .6s ease .15s both; text-align: center; }
-        p { color: #475569; }
-        .actions { display: flex; justify-content: center; gap: 10px; margin-top: 12px; }
-        .btn { padding: 10px 14px; text-decoration: none; border-radius: 10px; border: 1px solid transparent; font-size: 14px; box-shadow: 0 1px 2px rgba(0,0,0,.06); transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease; }
-        .btn:active { transform: translateY(1px); box-shadow: 0 0 0 rgba(0,0,0,0); }
-        .btn-confirm { background-color: #ef4444; color: white; }
-        .btn-confirm:hover { background-color: #dc2626; }
-        .btn-cancel { background-color: #64748b; color: white; }
-        .btn-cancel:hover { background-color: #475569; }
-        @keyframes cardIn { to { transform: translateY(0); opacity: 1; } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes floatBg { 0% { background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%; } 100% { background-position: 10% 5%, 90% 10%, 5% 90%, 95% 95%; } }
-    </style>
+<meta charset="UTF-8">
+<title>Delete User</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --raisin-black: #2D2728ff;
+    --van-dyke: #3F3735ff;
+    --silver: #C7C2BFff;
+    --jet: #383232ff;
+    --davys-gray: #5F5957ff;
+    --black: #040202ff;
+    --smoky-black: #0F0C0Cff;
+    --white: #FFFFFFff;
+    --red: #EF4444ff;
+}
+
+/* --- Base --- */
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('./background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--silver);
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+body::before {
+    content:'';
+    position: fixed;
+    inset: 0;
+    background: rgba(45,39,40,0.75);
+    z-index: -1;
+}
+
+/* --- Card --- */
+.container { width: 100%; max-width: 720px; }
+.card {
+    background: rgba(63,55,53,0.85);
+    border-radius: 2rem;
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
+.card-header {
+    padding: 1.5rem 2rem;
+    background: var(--jet);
+    border-bottom: 1px solid rgba(199,194,191,0.3);
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
+.card-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--red);
+}
+
+/* --- Card Body --- */
+.card-body {
+    padding: 2rem;
+    text-align: center;
+}
+.card-body p {
+    font-size: 1rem;
+    color: var(--silver);
+    margin-bottom: 1.5rem;
+}
+
+/* --- Buttons --- */
+.actions { display: flex; justify-content: center; gap: 0.75rem; }
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.4rem;
+    border-radius: 1.2rem;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+}
+.btn-confirm {
+    background: var(--red);
+    color: var(--white);
+}
+.btn-confirm:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.35);
+}
+.btn-cancel {
+    background: var(--davys-gray);
+    color: var(--white);
+}
+.btn-cancel:hover {
+    background: var(--jet);
+    transform: translateY(-2px);
+}
+</style>
 </head>
 <body>
-    <div class="bg-decor"></div>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h1>Delete User</h1>
-            </div>
-            <div class="card-body">
-                <p>Are you sure you want to delete <strong><?= $user['username'] ?></strong> (<?= $user['email'] ?>)?</p>
-                <form action="<?= site_url('users/delete/' . $user['id']) ?>" method="POST">
-                    <div class="actions">
-                        <button type="submit" class="btn btn-confirm">Yes, Delete</button>
-                        <a href="<?= site_url('users/view') ?>" class="btn btn-cancel">Cancel</a>
-                    </div>
-                </form>
-            </div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1><i class="fa-solid fa-trash"></i> Delete User</h1>
+        </div>
+        <div class="card-body">
+            <p>Are you sure you want to delete <strong><?= $user['username'] ?></strong> (<?= $user['email'] ?>)?</p>
+            <form action="<?= site_url('users/delete/' . $user['id']) ?>" method="POST">
+                <div class="actions">
+                    <button type="submit" class="btn btn-confirm">
+                        <i class="fa-solid fa-check"></i> Yes, Delete
+                    </button>
+                    <a href="<?= site_url('users/view') ?>" class="btn btn-cancel">
+                        <i class="fa-solid fa-arrow-left"></i> Cancel
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
 </body>
 </html>

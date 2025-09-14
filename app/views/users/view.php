@@ -27,7 +27,7 @@
 * { box-sizing: border-box; margin:0; padding:0; }
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('background.jpg') no-repeat center center fixed;
+    background: url('./background.jpg') no-repeat center center fixed;
     background-size: cover;
     color: var(--silver);
     min-height: 100vh;
@@ -43,7 +43,7 @@ body::before {
     content:'';
     position: fixed;
     inset: 0;
-    background: rgba(45,39,40,0.75); /* Raisin Black overlay */
+    background: rgba(45,39,40,0.75);
     z-index: -1;
 }
 
@@ -63,7 +63,7 @@ h1.main-title {
 
 /* --- Card --- */
 .card {
-    background: rgba(63,55,53,0.85); /* Van Dyke */
+    background: rgba(63,55,53,0.85);
     border-radius: 2rem;
     backdrop-filter: blur(15px);
     overflow: hidden;
@@ -86,23 +86,55 @@ h1.main-title {
     font-weight: 600;
     font-size: 1.6rem;
     color: var(--white);
-    border-bottom: 1px solid rgba(199,194,191,0.3); /* Silver */
+    border-bottom: 1px solid rgba(199,194,191,0.3);
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
 }
-.actions a {
-    text-decoration: none;
-    padding: 0.6rem 1.5rem;
-    border-radius: 1.5rem;
+
+/* --- Add User Button --- */
+.btn-add {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    padding: 0.5rem 1.4rem;
+    font-size: 1.3rem;
+    border-radius: 1.2rem;
     font-weight: 500;
-    color: var(--silver);
-    background: var(--davys-gray);
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.5);
     transition: all 0.25s ease;
 }
-.actions a:hover {
+.btn-add:hover {
+    background: #010101 !important;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.35);
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
 }
+
+/* --- Other Action Buttons --- */
+.btn-edit, .btn-delete {
+    padding: 0.4rem 0.9rem;
+    border-radius: 1rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.btn-edit { background: var(--davys-gray); color: var(--white); }
+.btn-edit:hover { background: var(--jet); }
+.btn-delete { background: #9B2C2C; color: var(--white); }
+.btn-delete:hover { background: #7B2424; }
+
+/* --- Action Buttons --- */
+.btn-add, .btn-edit, .btn-delete {
+    text-decoration: none; /* prevents underline */
+}
+
+.btn-add i, .btn-edit i, .btn-delete i {
+    text-decoration: none; /* specifically for icons */
+}
+
 
 /* --- Table Wrapper --- */
 .table-wrapper {
@@ -124,54 +156,21 @@ th, td {
     transition: all 0.2s;
 }
 th {
-    background: var(--raisin-black);
+    background: var(--smoky-black);
     color: var(--white);
     font-weight: 600;
 }
-tr:nth-child(even) td {
-    background: rgba(56,50,50,0.55); /* Jet */
-}
-tr:nth-child(odd) td {
-    background: rgba(63,55,53,0.55); /* Van Dyke */
-}
-tr:hover td {
-    background: var(--jet);
-    transform: scale(1.01);
-}
-td:last-child {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-/* --- Action Buttons --- */
-.btn-edit, .btn-delete {
-    padding: 0.4rem 0.9rem;
-    border-radius: 1rem;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-}
-.btn-edit {
-    background: var(--davys-gray);
-    color: var(--white);
-}
-.btn-edit:hover { background: var(--jet); }
-.btn-delete {
-    background: #9B2C2C; /* Red delete */
-    color: var(--white);
-}
-.btn-delete:hover { background: #7B2424; }
+tr:nth-child(even) td { background: rgba(56,50,50,0.55); }
+tr:nth-child(odd) td { background: rgba(63,55,53,0.55); }
+tr:hover td { background: var(--jet); transform: scale(1.01); }
+td:last-child { display: flex; justify-content: center; gap: 0.5rem; }
 
 /* --- Empty State --- */
 .empty {
     padding: 2rem;
     text-align: center;
     font-style: italic;
-    background: rgba(45,39,40,0.65); /* Raisin Black */
+    background: rgba(45,39,40,0.65);
     border-radius: 0 0 2rem 2rem;
     color: var(--silver);
     font-family: 'Poppins', sans-serif;
@@ -187,7 +186,7 @@ td:last-child {
         <div class="card-header">
             <span><i class="fa-solid fa-users"></i> User Directory</span>
             <div class="actions">
-                <a href="<?= site_url('users/create') ?>"><i class="fa-solid fa-user-plus"></i> Add User</a>
+                <a href="<?= site_url('users/create') ?>" class="btn-add"><i class="fa-solid fa-user-plus"></i> Add User</a>
             </div>
         </div>
         <div class="table-wrapper">
