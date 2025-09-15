@@ -43,7 +43,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 |
 */
 
-$router->get('/', 'Welcome::index');
+$router->get('/', 'UserController::view');
 $router->get('/users/view', 'UserController::view');
 $router->match('/users/create', 'UserController::create', ['GET', 'POST']);
 $router->match('/users/update/{id}', 'UserController::update', ['GET', 'POST']);
