@@ -90,13 +90,18 @@ h1.main-title {
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
 }
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
 /* --- Add User Button --- */
 .btn-add {
     background: var(--black) !important;
     color: var(--white) !important;
     padding: 0.5rem 1.4rem;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     border-radius: 1.2rem;
     font-weight: 500;
     text-decoration: none;
@@ -130,11 +135,41 @@ h1.main-title {
 .btn-add, .btn-edit, .btn-delete {
     text-decoration: none; /* prevents underline */
 }
-
 .btn-add i, .btn-edit i, .btn-delete i {
-    text-decoration: none; /* specifically for icons */
+    text-decoration: none;
 }
 
+/* --- Search Form --- */
+.search-form {
+    display: flex;
+    align-items: center;
+    background: var(--raisin-black-2);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.search-input {
+    border: none;
+    outline: none;
+    padding: 0.6rem 1rem;
+    background: transparent;
+    color: var(--white);
+    font-size: 1rem;
+}
+.search-input::placeholder {
+    color: var(--silver);
+}
+.search-btn {
+    border: none;
+    background: var(--black);
+    color: var(--white);
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.search-btn:hover {
+    background: var(--jet);
+}
 
 /* --- Table Wrapper --- */
 .table-wrapper {
@@ -175,9 +210,48 @@ td:last-child { display: flex; justify-content: center; gap: 0.5rem; }
     color: var(--silver);
     font-family: 'Poppins', sans-serif;
 }
+
+/* Ensure pagination UL has no bullets and centered */
+.pagination {
+    list-style: none;        /* removes bullets */
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+/* Style for LI items */
+.pagination li {
+    display: inline-flex;
+}
+
+/* Links and active page */
+.pagination li a,
+.pagination li span {
+    display: inline-block;
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.8rem;
+    background: var(--davys-gray);
+    color: var(--white);
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.pagination li a:hover {
+    background: var(--jet);
+}
+
+.pagination li.active a,
+.pagination li span.current {
+    background: var(--black);
+    font-weight: 600;
+}
+
+
 </style>
 </head>
-<body style="background-image: url('<?= base_url()?>public/background.jpg">
+<body style="background-image: url('<?= base_url()?>public/background.jpg')">
 
 <h1 class="main-title"><i class="fa-solid fa-users"></i> User Management System</h1>
 
@@ -185,10 +259,16 @@ td:last-child { display: flex; justify-content: center; gap: 0.5rem; }
     <div class="card">
         <div class="card-header">
             <span><i class="fa-solid fa-users"></i> User Directory</span>
-            <div class="actions">
+            <div class="header-actions">
+                <form action="<?=site_url('users/view');?>" method="get" class="search-form">
+                    <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
+                    <input class="search-input" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
+                    <button type="submit" class="search-btn"><i class="fa-solid fa-search"></i></button>
+                </form>
                 <a href="<?= site_url('users/create') ?>" class="btn-add"><i class="fa-solid fa-user-plus"></i> Add User</a>
             </div>
         </div>
+
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -219,6 +299,10 @@ td:last-child { display: flex; justify-content: center; gap: 0.5rem; }
                 <?php endif; ?>
                 </tbody>
             </table>
+        </div>
+        <!-- Pagination -->
+        <div class="pagination-wrapper">
+            <?= $page; ?>
         </div>
     </div>
 </div>
