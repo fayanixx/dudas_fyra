@@ -142,7 +142,7 @@ input:focus {
 }
 </style>
 </head>
-<body>
+<body style="background-image: url('<?= base_url()?>public/background.jpg">
 
 <div class="container">
     <div class="card">
