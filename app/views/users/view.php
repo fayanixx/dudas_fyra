@@ -27,7 +27,7 @@
 * { box-sizing: border-box; margin:0; padding:0; }
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('./background.jpg') no-repeat center center fixed;
+    background: url("background.jpg") no-repeat center center fixed;
     background-size: cover;
     color: var(--silver);
     min-height: 100vh;
@@ -177,7 +177,7 @@ td:last-child { display: flex; justify-content: center; gap: 0.5rem; }
 }
 </style>
 </head>
-<body>
+<body style="background-image: url('<?= base_url()?>public/background.jpg">
 
 <h1 class="main-title"><i class="fa-solid fa-users"></i> User Management System</h1>
 
