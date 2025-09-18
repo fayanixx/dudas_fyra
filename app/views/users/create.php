@@ -80,7 +80,7 @@ label {
     align-items: center;
     gap: 0.5rem;
 }
-input[type="text"], input[type="email"] {
+input[type="text"], input[type="email"], input[type="file"] {
     width: 100%;
     max-width: 100%;
     padding: 0.75rem 1rem;
@@ -140,7 +140,7 @@ input:focus {
 }
 </style>
 </head>
-<body style="background-image: url('<?= base_url()?>public/background.jpg">
+<body style="background-image: url('<?= base_url() ?>public/background.jpg');">
 
 <div class="container">
     <div class="card">
@@ -148,24 +148,61 @@ input:focus {
             <h1 class="title"><i class="fa-solid fa-user-plus"></i> Create User</h1>
         </div>
         <div class="card-body">
-            <form action="<?= site_url('users/create') ?>" method="POST">
-                <div class="form-group">
-                    <label for="username"><i class="fa-solid fa-user"></i> Username</label>
-                    <input type="text" name="username" id="username" placeholder="Enter username" required>
-                </div>
-                <div class="form-group">
-                    <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
-                    <input type="email" name="email" id="email" placeholder="Enter email" required>
-                </div>
-                <div class="actions">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa-solid fa-check"></i> Create
-                    </button>
-                    <a href="<?= site_url('users/view') ?>" class="btn btn-secondary">
-                        <i class="fa-solid fa-arrow-left"></i> Back
-                    </a>
-                </div>
-            </form>
+            <!-- IMPORTANT: may enctype na -->
+ <form action="<?= site_url('users/create') ?>" method="POST" enctype="multipart/form-data">
+    <!-- Top section: Image & Upload -->
+    <div class="form-top" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem;">
+        <!-- Left: Profile Image Preview (default) -->
+        <div class="profile-left" style="flex:1; text-align:center;">
+            <img src="<?= base_url('public/default-avatar.png') ?>" alt="Default profile" class="profile-preview" id="profilePreview" style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
+        </div>
+
+        <!-- Right: Upload Button -->
+        <div class="profile-right" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+            <label for="profile" style="font-weight:500; color:var(--silver); margin-bottom:0.5rem;">
+                <i class="fa-solid fa-image"></i> Upload Profile Image
+            </label>
+            <input type="file" name="profile" id="profile" accept="image/*">
+        </div>
+    </div>
+
+    <!-- Bottom section: Username & Email -->
+    <div class="form-group">
+        <label for="username"><i class="fa-solid fa-user"></i> Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter username" required>
+    </div>
+    <div class="form-group">
+        <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
+        <input type="email" name="email" id="email" placeholder="Enter email" required>
+    </div>
+
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-check"></i> Create
+        </button>
+        <a href="<?= site_url('users/view') ?>" class="btn btn-secondary">
+            <i class="fa-solid fa-arrow-left"></i> Back
+        </a>
+    </div>
+</form>
+
+<script>
+// Image preview
+const profileInput = document.getElementById('profile');
+const previewImg = document.getElementById('profilePreview');
+
+profileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+
         </div>
     </div>
 </div>

@@ -43,10 +43,31 @@ class UserController extends Controller {
         if ($this->io->method() === 'post') {
             $username = $this->io->post('username');
             $email = $this->io->post('email');
+            $imagePath = null;
+
+            // handle file upload
+            if (!empty($_FILES['profile']['name'])) {
+                $this->call->library('upload', $_FILES["profile"]);
+                $this->upload
+                    ->set_dir('uploads')
+                    ->allowed_extensions(['jpg','jpeg','png'])
+                    ->allowed_mimes(['image/jpeg','image/png'])
+                    ->max_size(5)   // 5MB max
+                    ->is_image()
+                    ->encrypt_name();
+
+                if ($this->upload->do_upload()) {
+                    $imagePath = 'uploads/' . $this->upload->get_filename();
+                } else {
+                    echo implode('<br>', $this->upload->get_errors());
+                    return;
+                }
+            }
 
             $data = [
-                'username' => $username,
-                'email' => $email
+                'username'   => $username,
+                'email'      => $email,
+                'image_path' => $imagePath
             ];
 
             try {
@@ -65,11 +86,34 @@ class UserController extends Controller {
         if ($this->io->method() === 'post') {
             $username = $this->io->post('username');
             $email = $this->io->post('email');
+            $imagePath = null;
+
+            if (!empty($_FILES['profile']['name'])) {
+                $this->call->library('upload', $_FILES["profile"]);
+                $this->upload
+                    ->set_dir('uploads')
+                    ->allowed_extensions(['jpg','jpeg','png'])
+                    ->allowed_mimes(['image/jpeg','image/png'])
+                    ->max_size(5)
+                    ->is_image()
+                    ->encrypt_name();
+
+                if ($this->upload->do_upload()) {
+                    $imagePath = 'uploads/' . $this->upload->get_filename();
+                } else {
+                    echo implode('<br>', $this->upload->get_errors());
+                    return;
+                }
+            }
 
             $data = [
                 'username' => $username,
-                'email' => $email
+                'email'    => $email
             ];
+
+            if ($imagePath !== null) {
+                $data['image_path'] = $imagePath;
+            }
 
             try {
                 $this->UserModel->update($id, $data);
