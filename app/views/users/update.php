@@ -40,7 +40,6 @@ body::before {
     z-index: -1;
 }
 
-/* --- Card --- */
 .container { width: 100%; max-width: 720px; }
 .card {
     background: rgba(63,55,53,0.85);
@@ -69,7 +68,6 @@ body::before {
     gap: 0.75rem;
 }
 
-/* --- Form --- */
 .card-body { padding: 2rem; }
 .form-group { margin-bottom: 1.5rem; }
 label {
@@ -82,7 +80,6 @@ label {
 }
 input[type="text"], input[type="email"], input[type="file"] {
     width: 100%;
-    max-width: 100%;
     padding: 0.75rem 1rem;
     border-radius: 1rem;
     border: 1px solid var(--davys-gray);
@@ -100,15 +97,14 @@ input:focus {
 }
 
 img.profile-preview {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
     margin-top: 0.5rem;
     border: 2px solid var(--silver);
 }
 
-/* --- Buttons --- */
 .actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1rem; }
 .btn {
     display: inline-flex;
@@ -153,64 +149,62 @@ img.profile-preview {
             <h1 class="title"><i class="fa-solid fa-pen-to-square"></i> Update User</h1>
         </div>
         <div class="card-body">
- <form action="<?= site_url('users/update/' . $user['id']) ?>" method="POST" enctype="multipart/form-data">
-    <!-- Top section: Image & Upload -->
-    <div class="form-top" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem;">
-        <!-- Left: Profile Image Preview -->
-        <div class="profile-left" style="flex:1; text-align:center;">
-            <?php if(!empty($user['image_path']) && file_exists($user['image_path'])): ?>
-                <img src="<?= base_url($user['image_path']) ?>" alt="<?= htmlspecialchars($user['username']) ?>'s profile" class="profile-preview" id="profilePreview" style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
-            <?php else: ?>
-                <img src="<?= base_url('public/default-avatar.png') ?>" alt="Default profile" class="profile-preview" id="profilePreview" style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
-            <?php endif; ?>
+            <form action="<?= site_url('users/update/' . $user['id']) ?>" method="POST" enctype="multipart/form-data">
+                <!-- Image Section -->
+                <div class="form-top" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem;">
+                    <div class="profile-left" style="flex:1; text-align:center;">
+                        <img src="<?= !empty($user['image_path']) ? base_url($user['image_path']) : base_url('public/default-avatar.png') ?>" 
+                             alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
+                             class="profile-preview" id="profilePreview">
+                    </div>
+                    <div class="profile-right" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+                        <label for="profile" style="font-weight:500; color:var(--silver); margin-bottom:0.5rem;">
+                            <i class="fa-solid fa-image"></i> Upload New Profile Image
+                        </label>
+                        <input type="file" name="profile" id="profile" accept="image/*">
+                    </div>
+                </div>
+
+                <!-- Form Fields -->
+                <div class="form-group">
+                    <label for="username"><i class="fa-solid fa-user"></i> Username</label>
+                    <input type="text" name="username" id="username" value="<?= $user['username'] ?>" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
+                    <input type="email" name="email" id="email" value="<?= $user['email'] ?>" placeholder="Enter email" required>
+                </div>
+
+                <!-- Actions -->
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Changes
+                    </button>
+                    <a href="<?= site_url('users/view') ?>" class="btn btn-secondary">
+                        <i class="fa-solid fa-xmark"></i> Cancel
+                    </a>
+                </div>
+            </form>
+
+            <script>
+            // Preview new image before upload
+            const profileInput = document.getElementById('profile');
+            const previewImg = document.getElementById('profilePreview');
+
+            profileInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if(file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+            </script>
         </div>
-
-        <!-- Right: Upload Button -->
-        <div class="profile-right" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-            <label for="profile" style="font-weight:500; color:var(--silver); margin-bottom:0.5rem;">
-                <i class="fa-solid fa-image"></i> Upload New Profile Image
-            </label>
-            <input type="file" name="profile" id="profile" accept="image/*">
-        </div>
     </div>
-
-    <!-- Bottom section: Username & Email -->
-    <div class="form-group">
-        <label for="username"><i class="fa-solid fa-user"></i> Username</label>
-        <input type="text" name="username" id="username" value="<?= $user['username'] ?>" placeholder="Enter username" required>
-    </div>
-    <div class="form-group">
-        <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
-        <input type="email" name="email" id="email" value="<?= $user['email'] ?>" placeholder="Enter email" required>
-    </div>
-
-    <div class="actions">
-        <button type="submit" class="btn btn-primary">
-            <i class="fa-solid fa-floppy-disk"></i> Save Changes
-        </button>
-        <a href="<?= site_url('users/view') ?>" class="btn btn-secondary">
-            <i class="fa-solid fa-xmark"></i> Cancel
-        </a>
-    </div>
-</form>
-
-<script>
-// Image preview
-const profileInput = document.getElementById('profile');
-const previewImg = document.getElementById('profilePreview');
-
-profileInput.addEventListener('change', function() {
-    const file = this.files[0];
-    if(file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImg.src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-    }
-});
-</script>
-
+</div>
 
 </body>
 </html>
