@@ -211,7 +211,7 @@ img.profile-img { border-radius: 50%; object-fit: cover; width:50px; height:50px
                         <td><?= $user['id'] ?></td>
                         <td>
                             <?php if(!empty($user['image_path'])): ?>
-                                <img src="<?= base_url('public/'.$user['image_path']) ?>" 
+                                <img src="<?= base_url('public/uploads/'.$user['image_path']) ?>">
                                      alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
                                      class="profile-img">
                             <?php else: ?>
