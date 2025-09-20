@@ -150,21 +150,31 @@ input:focus {
         <div class="card-body">
             <!-- IMPORTANT: may enctype na -->
             <form action="<?= site_url('users/create') ?>" method="POST" enctype="multipart/form-data">
-                <!-- Top section: Image & Upload -->
-                <div class="form-top" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem;">
-                    <!-- Left: Profile Image Preview (default) -->
-                    <div class="profile-left" style="flex:1; text-align:center;">
-                        <img src="<?= base_url('public/default-avatar.png') ?>" alt="Default profile" class="profile-preview" id="profilePreview" style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
-                    </div>
-
-                    <!-- Right: Upload Button -->
-                    <div class="profile-right" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-                        <label for="profile" style="font-weight:500; color:var(--silver); margin-bottom:0.5rem;">
-                            <i class="fa-solid fa-image"></i> Upload Profile Image
-                        </label>
-                        <input type="file" name="profile" id="profile" accept="image/*">
-                    </div>
+            <!-- Top section: Image & Upload -->
+            <div class="form-top" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem;">
+                <!-- Left: Profile Image Preview (default muna) -->
+                <div class="profile-left" style="flex:1; text-align:center;">
+                    <?php if (!empty($user['image_path'])): ?>
+                        <img src="<?= base_url('public/' . $user['image_path']) ?>" 
+                            alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
+                            class="profile-preview" id="profilePreview" 
+                            style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
+                    <?php else: ?>
+                        <img src="<?= base_url('public/default-avatar.png') ?>" 
+                            alt="Default profile" 
+                            class="profile-preview" id="profilePreview" 
+                            style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
+                    <?php endif; ?>
                 </div>
+
+                <!-- Right: Upload Button -->
+                <div class="profile-right" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+                    <label for="profile" style="font-weight:500; color:var(--silver); margin-bottom:0.5rem;">
+                        <i class="fa-solid fa-image"></i> Upload Profile Image
+                    </label>
+                    <input type="file" name="profile" id="profile" accept="image/*">
+                </div>
+            </div>
 
                 <!-- Bottom section: Username & Email -->
                 <div class="form-group">
