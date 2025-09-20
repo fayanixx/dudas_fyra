@@ -45,13 +45,13 @@ class UserController extends Controller {
         if ($this->io->method() === 'post') {
             $username = $this->io->post('username');
             $email = $this->io->post('email');
-            $imagePath = 'public/default-avatar.png'; // default
+            $imagePath = 'default-avatar.png'; // default (relative only)
 
             // Handle file upload
             if (!empty($_FILES['profile']['name'])) {
                 $this->call->library('upload', $_FILES["profile"]);
                 $this->upload
-                    ->set_dir('public/uploads') // save inside public so it's accessible
+                    ->set_dir('public/uploads') // actual save path
                     ->allowed_extensions(['jpg','jpeg','png'])
                     ->allowed_mimes(['image/jpeg','image/png'])
                     ->max_size(5)   // 5MB max
@@ -59,7 +59,8 @@ class UserController extends Controller {
                     ->encrypt_name();
 
                 if ($this->upload->do_upload()) {
-                    $imagePath = 'public/uploads/' . $this->upload->get_filename();
+                    // Save relative path only
+                    $imagePath = 'uploads/' . $this->upload->get_filename();
                 } else {
                     echo implode('<br>', $this->upload->get_errors());
                     return;
@@ -103,7 +104,7 @@ class UserController extends Controller {
                     ->encrypt_name();
 
                 if ($this->upload->do_upload()) {
-                    $imagePath = 'public/uploads/' . $this->upload->get_filename();
+                    $imagePath = 'uploads/' . $this->upload->get_filename();
                 } else {
                     echo implode('<br>', $this->upload->get_errors());
                     return;
@@ -133,9 +134,10 @@ class UserController extends Controller {
         $user = $this->UserModel->find($id);
         
         // Optional: delete the uploaded file
-        if($user && isset($user['image_path']) && $user['image_path'] !== 'public/default-avatar.png') {
-            if(file_exists($user['image_path'])) {
-                unlink($user['image_path']);
+        if($user && isset($user['image_path']) && $user['image_path'] !== 'default-avatar.png') {
+            $filePath = FCPATH . 'public/' . $user['image_path'];
+            if(file_exists($filePath)) {
+                unlink($filePath);
             }
         }
 
