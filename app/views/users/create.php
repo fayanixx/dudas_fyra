@@ -160,7 +160,7 @@ input:focus {
                             class="profile-preview" id="profilePreview" 
                             style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
                     <?php else: ?>
-                        <img src="<?= base_url('public/default-avatar.png') ?>" 
+                            <img src="<?= base_url() ?>public/default-avatar.png" 
                             alt="Default profile" 
                             class="profile-preview" id="profilePreview" 
                             style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
