@@ -154,12 +154,12 @@ img.profile-preview {
                 <div class="form-top" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem;">
                     <div class="profile-left" style="flex:1; text-align:center;">
                         <?php if (!empty($user['image_path']) && $user['image_path'] !== 'default-avatar.png'): ?>
-                                <img src="<?= base_url('uploads/' . basename($user['image_path'])) ?>" 
+                            <img src="<?= base_url('public/' . $user['image_path']) ?>" 
                                 alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
                                 class="profile-preview" id="profilePreview">
                         <?php else: ?>
-                                <img src="<?= base_url() ?>public/default-avatar.png" 
-                                alt="Default profile" 
+                            <img src="<?= base_url() ?>public/default-avatar.png" 
+                                    alt="Default profile" 
                                 class="profile-preview" id="profilePreview">
                         <?php endif; ?>
                     </div>
