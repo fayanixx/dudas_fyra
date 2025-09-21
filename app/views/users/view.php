@@ -225,8 +225,8 @@ td:last-child a { text-decoration: none; }
 img.profile-img { 
     border-radius: 50%; 
     object-fit: cover; 
-    width: 40px;  /* match button height */
-    height: 40px; 
+    width: 50px;  /* match button height */
+    height: 50px; 
     flex-shrink: 0;
 }
 
