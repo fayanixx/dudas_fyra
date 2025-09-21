@@ -158,8 +158,8 @@ img.profile-preview {
                                 alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
                                 class="profile-preview" id="profilePreview">
                         <?php else: ?>
-                            <img src="<?= base_url() ?>public/default-avatar.png" 
-                                    alt="Default profile" 
+                                <img src="<?= base_url() ?>public/default-avatar.png" 
+                                alt="Default profile" 
                                 class="profile-preview" id="profilePreview">
                         <?php endif; ?>
                     </div>
