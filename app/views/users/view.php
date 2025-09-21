@@ -116,7 +116,9 @@ h1.main-title {
     gap: 5px;
     transition: all 0.2s ease;
     cursor: pointer;
+    text-decoration: none; /* remove underline */
 }
+
 .btn-edit { background: var(--davys-gray); color: var(--white); }
 .btn-edit:hover { background: var(--jet); }
 .btn-delete { background: #9B2C2C; color: var(--white); }
@@ -157,23 +159,69 @@ table {
     border-radius: 1.5rem;
     overflow: hidden;
 }
+
 th, td {
     padding: 1rem 1.5rem;
     text-align: center;
     transition: all 0.2s;
 }
+
 th { background: var(--smoky-black); color: var(--white); font-weight: 600; }
+
 tr:nth-child(even) td { background: rgba(56,50,50,0.55); }
 tr:nth-child(odd) td { background: rgba(63,55,53,0.55); }
 tr:hover td { background: var(--jet); transform: scale(1.01); }
-td:last-child { display: flex; justify-content: center; gap: 0.5rem; }
-.empty { padding: 2rem; text-align: center; font-style: italic; background: rgba(45,39,40,0.65); border-radius: 0 0 2rem 2rem; color: var(--silver); }
-.pagination { list-style: none; display: flex; justify-content: center; gap: 0.5rem; padding: 0; margin: 1.5rem 0; }
+
+td:last-child { 
+    display: flex; 
+    justify-content: center; 
+    gap: 0.5rem; 
+    background: inherit; /* inherit row color for flex container */ 
+}
+
+td:last-child a { text-decoration: none; } /* remove underline from links */
+
+.empty { 
+    padding: 2rem; 
+    text-align: center; 
+    font-style: italic; 
+    background: rgba(45,39,40,0.65); 
+    border-radius: 0 0 2rem 2rem; 
+    color: var(--silver); 
+}
+
+.pagination { 
+    list-style: none; 
+    display: flex; 
+    justify-content: center; 
+    gap: 0.5rem; 
+    padding: 0; 
+    margin: 1.5rem 0; 
+}
 .pagination li { display: inline-flex; }
-.pagination li a, .pagination li span { display: inline-block; padding: 0.5rem 0.9rem; border-radius: 0.8rem; background: var(--davys-gray); color: var(--white); text-decoration: none; transition: background 0.2s; }
+.pagination li a, .pagination li span { 
+    display: inline-block; 
+    padding: 0.5rem 0.9rem; 
+    border-radius: 0.8rem; 
+    background: var(--davys-gray); 
+    color: var(--white); 
+    text-decoration: none; 
+    transition: background 0.2s; 
+}
 .pagination li a:hover { background: var(--jet); }
-.pagination li.active a, .pagination li span.current { background: var(--black); font-weight: 600; }
-img.profile-img { border-radius: 50%; object-fit: cover; width:50px; height:50px; }
+.pagination li.active a, .pagination li span.current { 
+    background: var(--black); 
+    font-weight: 600; 
+}
+
+/* --- Profile image --- */
+img.profile-img { 
+    border-radius: 50%; 
+    object-fit: cover; 
+    width: 50px; 
+    height: 50px; 
+    flex-shrink: 0; /* prevent flex from shrinking image */
+}
 </style>
 </head>
 <body>
