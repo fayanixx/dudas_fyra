@@ -113,10 +113,13 @@ h1.main-title {
     font-weight: 500;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    gap: 0.3rem;
     transition: all 0.2s ease;
     cursor: pointer;
-    text-decoration: none; /* remove underline */
+    text-decoration: none;
+    white-space: nowrap;
+    height: 40px; /* same height as profile image */
 }
 
 .btn-edit { background: var(--davys-gray); color: var(--white); }
@@ -164,6 +167,7 @@ th, td {
     padding: 1rem 1.5rem;
     text-align: center;
     transition: all 0.2s;
+    vertical-align: middle; /* center content vertically */
 }
 
 th { background: var(--smoky-black); color: var(--white); font-weight: 600; }
@@ -172,14 +176,17 @@ tr:nth-child(even) td { background: rgba(56,50,50,0.55); }
 tr:nth-child(odd) td { background: rgba(63,55,53,0.55); }
 tr:hover td { background: var(--jet); transform: scale(1.01); }
 
-td:last-child { 
-    display: flex; 
-    justify-content: center; 
-    gap: 0.5rem; 
-    background: inherit; /* inherit row color for flex container */ 
+/* Action buttons in the last column */
+td:last-child {
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    gap: 0.5rem;
+    background: inherit;     /* inherit row color */
 }
 
-td:last-child a { text-decoration: none; } /* remove underline from links */
+/* Remove underline from links in actions */
+td:last-child a { text-decoration: none; }
 
 .empty { 
     padding: 2rem; 
@@ -218,10 +225,11 @@ td:last-child a { text-decoration: none; } /* remove underline from links */
 img.profile-img { 
     border-radius: 50%; 
     object-fit: cover; 
-    width: 50px; 
-    height: 50px; 
-    flex-shrink: 0; /* prevent flex from shrinking image */
+    width: 40px;  /* match button height */
+    height: 40px; 
+    flex-shrink: 0;
 }
+
 </style>
 </head>
 <body>
