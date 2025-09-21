@@ -172,24 +172,14 @@ tr:nth-child(even) td { background: rgba(56,50,50,0.55); }
 tr:nth-child(odd) td { background: rgba(63,55,53,0.55); }
 tr:hover td { background: var(--jet); transform: scale(1.01); }
 
-td:last-child {
-    display: flex;
-    justify-content: center;
-    align-items: center;  /* vertically center icons */
-    gap: 0.5rem;
-    background: inherit;  /* inherit row color */
-    padding: 0.5rem 0;    /* adjust vertical padding */
+td:last-child { 
+    display: flex; 
+    justify-content: center; 
+    gap: 0.5rem; 
+    background: inherit; /* inherit row color for flex container */ 
 }
 
-td:last-child a {
-    text-decoration: none; /* remove underline */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-}
+td:last-child a { text-decoration: none; } /* remove underline from links */
 
 .empty { 
     padding: 2rem; 
