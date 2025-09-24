@@ -150,21 +150,18 @@ img.profile-preview {
         </div>
         <div class="card-body">
             <form action="<?= site_url('users/update/' . $user['id']) ?>" method="POST" enctype="multipart/form-data">
-                    <!-- Image Section -->
-                    <div class="form-top" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem;">
-                        <div class="profile-left" style="flex:1; text-align:center;">
-                            <?php if (!empty($user['image_path']) && $user['image_path'] !== 'public/default-avatar.png'): ?>
-                                <img src="<?= base_url($user['image_path']) ?>" 
-                                    alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
-                                    class="profile-preview" id="profilePreview"
-                                    style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
-                            <?php else: ?>
-                                <img src="<?= base_url('public/default-avatar.png') ?>" 
-                                    alt="Default profile" 
-                                    class="profile-preview" id="profilePreview"
-                                    style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
-                            <?php endif; ?>
-                        </div>
+                <!-- Image Section -->
+                <div class="form-top" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem;">
+                    <div class="profile-left" style="flex:1; text-align:center;">
+                        <?php if (!empty($user['image_path']) && $user['image_path'] !== 'default-avatar.png'): ?>
+                            <img src="<?= base_url('public/' . $user['image_path']) ?>" 
+                                alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
+                                class="profile-preview" id="profilePreview">
+                        <?php else: ?>
+                            <img src="<?= base_url() ?>public/default-avatar.png" 
+                                alt="Default profile" 
+                                class="profile-preview" id="profilePreview">
+                        <?php endif; ?>
                     </div>
                     <div class="profile-right" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
                         <label for="profile" style="font-weight:500; color:var(--silver); margin-bottom:0.5rem;">
@@ -195,7 +192,7 @@ img.profile-preview {
                 </div>
             </form>
 
-        <script>
+            <script>
             // Preview new image before upload
             const profileInput = document.getElementById('profile');
             const previewImg = document.getElementById('profilePreview');
@@ -203,34 +200,14 @@ img.profile-preview {
             profileInput.addEventListener('change', function() {
                 const file = this.files[0];
                 if(file) {
-                    // Check file type (accept only images)
-                    const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-                    if(!validTypes.includes(file.type)) {
-                        alert("Only JPG and PNG images are allowed!");
-                        profileInput.value = ''; // clear input
-                        return;
-                    }
-
-                    // Optional: check file size (limit e.g. 5MB)
-                    const maxSize = 5 * 1024 * 1024; // 5MB
-                    if(file.size > maxSize) {
-                        alert("Image size must be less than 5MB.");
-                        profileInput.value = ''; // clear input
-                        return;
-                    }
-
-                    // Show preview
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         previewImg.src = e.target.result;
                     }
                     reader.readAsDataURL(file);
-                } else {
-                    // fallback (if no file selected)
-                    previewImg.src = previewImg.getAttribute('data-current'); 
                 }
             });
-        </script>
+            </script>
         </div>
     </div>
 </div>
