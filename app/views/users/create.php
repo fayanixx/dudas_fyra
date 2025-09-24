@@ -154,19 +154,19 @@ input:focus {
             <div class="form-top" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem;">
                 <!-- Left: Profile Image Preview (default muna) -->
                 <div class="profile-left" style="flex:1; text-align:center;">
+                <div class="profile-container">
                     <?php if (!empty($user['image_path'])): ?>
                         <img src="<?= base_url($user['image_path']) ?>" 
                             alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
                             class="profile-preview" id="profilePreview" 
                             style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
                     <?php else: ?>
-                            <img src="<?= base_url() ?>public/default-avatar.png" 
+                        <img src="<?= base_url('public/default-avatar.png') ?>" 
                             alt="Default profile" 
                             class="profile-preview" id="profilePreview" 
                             style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
                     <?php endif; ?>
                 </div>
-
                 <!-- Right: Upload Button -->
                 <div class="profile-right" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
                     <label for="profile" style="font-weight:500; color:var(--silver); margin-bottom:0.5rem;">
@@ -195,22 +195,21 @@ input:focus {
                     </a>
                 </div>
             </form>
-
             <script>
-            // Image preview
-            const profileInput = document.getElementById('profile');
-            const previewImg = document.getElementById('profilePreview');
+                // Image preview
+                const profileInput = document.getElementById('profile');
+                const previewImg = document.getElementById('profilePreview');
 
-            profileInput.addEventListener('change', function() {
-                const file = this.files[0];
-                if(file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewImg.src = e.target.result;
+                profileInput.addEventListener('change', function() {
+                    const file = this.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            previewImg.src = e.target.result;
+                        }
+                        reader.readAsDataURL(file);
                     }
-                    reader.readAsDataURL(file);
-                }
-            });
+                });
             </script>
         </div>
     </div>

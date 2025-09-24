@@ -266,14 +266,16 @@ img.profile-img {
                     <tr>
                         <td><?= $user['id'] ?></td>
                         <td>
-                            <?php if (!empty($user['image_path'])): ?>
+                            <?php if (!empty($user['image_path']) && $user['image_path'] !== 'public/default-avatar.png'): ?>
                                 <img src="<?= base_url($user['image_path']) ?>" 
                                     alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
-                                    class="profile-img" />
+                                    class="profile-img" 
+                                    style="width:40px; height:40px; border-radius:50%; object-fit:cover;" />
                             <?php else: ?>
-                                <img src="<?= base_url() ?>public/default-avatar.png" 
+                                <img src="<?= base_url('public/default-avatar.png') ?>" 
                                     alt="Default profile" 
-                                    class="profile-img" />
+                                    class="profile-img" 
+                                    style="width:40px; height:40px; border-radius:50%; object-fit:cover;" />
                             <?php endif; ?>
                         </td>
                         <td><?= $user['username'] ?></td>
