@@ -155,12 +155,12 @@ input:focus {
                 <!-- Left: Profile Image Preview (default muna) -->
                 <div class="profile-left" style="flex:1; text-align:center;">
                     <?php if (!empty($user['image_path'])): ?>
-                        <img src="<?= base_url('public/' . $user['image_path']) ?>" 
+                        <img src="<?= base_url($user['image_path']) ?>" 
                             alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
                             class="profile-preview" id="profilePreview" 
                             style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
                     <?php else: ?>
-                            <img src="<?= base_url() ?>public/default-avatar.png" 
+                        <img src="<?= base_url('public/default-avatar.png') ?>" 
                             alt="Default profile" 
                             class="profile-preview" id="profilePreview" 
                             style="width:120px; height:120px; border-radius:50%; object-fit:cover;">
