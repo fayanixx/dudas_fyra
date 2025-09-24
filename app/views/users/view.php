@@ -271,7 +271,7 @@ img.profile-img {
                                     alt="<?= htmlspecialchars($user['username']) ?>'s profile" 
                                     class="profile-img" />
                             <?php else: ?>
-                                <img src="<?= base_url('public/default-avatar.png') ?>" 
+                                <img src="<?= base_url() ?>public/default-avatar.png" 
                                     alt="Default profile" 
                                     class="profile-img" />
                             <?php endif; ?>
