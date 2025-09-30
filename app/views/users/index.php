@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* Color Variables from your style */
     :root {
         --raisin-black: #2D2728ff;
         --van-dyke: #3F3735ff;
@@ -22,12 +21,10 @@
         --raisin-black-2: #282222ff;
         --platinum: #EAE8E5ff;
         --white: #FFFFFFff;
-        /* Custom for Alert/Error */
         --error-red: #9B2C2C;
         --error-bg: rgba(155, 44, 44, 0.2);
     }
 
-    /* Reset & Base */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
@@ -50,7 +47,6 @@
       z-index: -1;
     }
 
-    /* --- GLOBAL TITLE STYLE --- */
     .system-title {
         font-family: 'Playfair Display', serif;
         font-size: 3rem; 
@@ -61,7 +57,6 @@
         text-align: center;
     }
 
-    /* --- DASHBOARD CONTAINER --- */
     .dashboard-container {
       background: rgba(63,55,53,0.85);
       border-radius: 2rem;
@@ -78,14 +73,13 @@
         box-shadow: 0 25px 50px rgba(0,0,0,0.6);
     }
 
-    /* --- TOP BAR: Directory Title (Left) and Action Buttons (Right) --- */
     .header-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1rem;
       padding-bottom: 1rem;
-      border-bottom: 1px solid var(--jet);
+      border-bottom: 1.5px solid var(--black);
       flex-wrap: wrap; 
       gap: 1rem;
     }
@@ -102,7 +96,6 @@
         color: var(--silver);
     }
     
-    /* Container for Logout and Create User */
     .header-actions {
         display: flex;
         gap: 0.75rem; 
@@ -110,7 +103,6 @@
         margin-left: auto; 
     }
 
-    /* Create User Button */
     .btn-create {
         background: var(--black) !important;
         color: var(--white) !important;
@@ -125,9 +117,7 @@
         align-items: center;
         gap: 0.5rem;
         border: none;
-        /* --- DITO ANG PAGBABAGO --- */
         font-family: 'Playfair Display', serif;
-        /* --- END NG PAGBABAGO --- */
     }
     .btn-create:hover {
         background: var(--smoky-black) !important;
@@ -135,7 +125,6 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.6);
     }
 
-    /* Logout Button */
     .btn-logout {
       background: var(--error-red);
       color: var(--white);
@@ -151,9 +140,7 @@
       transition: all 0.25s ease;
       border: none;
       cursor: pointer;
-      /* --- DITO ANG PAGBABAGO --- */
       font-family: 'Playfair Display', serif;
-      /* --- END NG PAGBABAGO --- */
     }
     .btn-logout:hover {
       background: #7B2424;
@@ -161,7 +148,6 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.6);
     }
 
-    /* --- SECOND ROW: Greetings and Search Bar --- */
     .action-status-bar {
         display: flex;
         justify-content: space-between;
@@ -171,7 +157,6 @@
         flex-wrap: wrap;
     }
     
-    /* Welcome/Status Box (Top Left) */
     .user-status {
       font-family: 'Playfair Display', serif;
       background: rgba(63,55,53,0.7);
@@ -203,7 +188,6 @@
       color: var(--error-red);
     }
 
-    /* Search Form (Top Right) */
     .search-form {
       display: flex;
       align-items: center;
@@ -233,7 +217,6 @@
     }
     .search-form button:hover { background: var(--jet); }
 
-    /* --- TABLE STYLES --- */
     .table-wrapper { overflow-x: auto; max-width: 100%; }
     table {
         width: 100%;
@@ -267,7 +250,6 @@
     }
     td:last-child a { text-decoration:none; }
     
-    /* Action Buttons (with icons) */
     .btn-action {
         padding: 0.4rem 0.9rem;
         border-radius: 1rem;
@@ -294,7 +276,6 @@
         font-size: 0.9em;
     }
     
-    /* Pagination */
     .pagination-container { display: flex; justify-content:center; margin:1.5rem 0; }
     .pagination { list-style:none; display:flex; justify-content:center; gap:0.5rem; padding:0; margin:0; }
     .pagination li a, .pagination li span {
@@ -313,7 +294,6 @@
         border: none;
     }
     
-    /* Media Queries for Responsiveness */
     @media (max-width: 768px) {
       .system-title { font-size: 2.5rem; }
       .directory-title { font-size: 1.5rem; }
@@ -343,7 +323,7 @@
     }
   </style>
 </head>
-<body style="background: url('<?= base_url() ?>public/background.jpg') no-repeat center center fixed; background-size: cover;">
+<body>
 
   <h1 class="system-title">User Management System</h1>
 
@@ -383,7 +363,7 @@
       <form action="<?=site_url('users');?>" method="get" class="search-form">
         <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
         <input name="q" type="text" placeholder="Search by name or email..." value="<?=html_escape($q);?>">
-        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>  
+        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button> 
       </form>
     </div>
 
@@ -446,7 +426,6 @@
     <div class="pagination-container">
       <ul class="pagination">
         <?php 
-          // Note: The variable $page must contain the rendered pagination HTML from your CodeIgniter/PHP framework.
           echo $page; 
         ?>
       </ul>

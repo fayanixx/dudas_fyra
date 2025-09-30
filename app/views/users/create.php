@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* Color Variables from your style */
     :root {
         --raisin-black: #2D2728ff;
         --van-dyke: #3F3735ff;
@@ -21,28 +20,24 @@
         --raisin-black-2: #282222ff;
         --platinum: #EAE8E5ff;
         --white: #FFFFFFff;
-        /* Custom for Alert/Error */
         --error-red: #9B2C2C;
         --error-bg: rgba(155, 44, 44, 0.2);
     }
 
-    /* Reset & Base */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
-      /* Using your background style - NOTE: Assuming PHP is properly configured to process base_url() */
       background: url("<?= base_url() ?>public/background.jpg") no-repeat center center fixed;
       background-size: cover;
       color: var(--silver);
       min-height: 100vh;
       display: flex;
-      flex-direction: column; /* Ginawang column para ma-accommodate ang system title */
-      justify-content: flex-start; /* Inayos ang alignment */
+      flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
       padding: 2rem 0;
       position: relative;
     }
-    /* Dark overlay for background image */
     body::before {
       content:'';
       position: fixed;
@@ -51,7 +46,6 @@
       z-index: -1;
     }
 
-    /* --- GLOBAL SYSTEM TITLE STYLE (KOPYADO SA DASHBOARD) --- */
     .system-title {
         font-family: 'Playfair Display', serif;
         font-size: 2.7rem; 
@@ -61,10 +55,8 @@
         margin-bottom: 1.5rem;
         text-align: center;
     }
-    /* ------------------------------------------------------------------- */
 
     .form-card {
-      /* Using your card style */
       background: rgba(63,55,53,0.9);
       border-radius: 2rem;
       backdrop-filter: blur(15px);
@@ -74,7 +66,6 @@
       box-shadow: 0 15px 40px rgba(0,0,0,0.5);
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      /* Inalis ang margin-top dahil nag-column na tayo */
     }
     .form-card:hover {
       transform: translateY(-3px);
@@ -82,7 +73,6 @@
     }
 
     .form-card h1 {
-      /* Updated Title Style with Icon */
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
       font-weight: 550;
@@ -101,7 +91,6 @@
         font-size: 1.5rem;
     }
 
-    /* Error Box */
     .error-box-styled {
       background: var(--error-bg);
       color: var(--error-red);
@@ -119,16 +108,16 @@
     .form-group {
       margin-bottom: 1.2rem;
       text-align: left;
-      position: relative; /* Added for icon positioning */
+      position: relative;
     }
 
     .form-group input,
     .form-group select {
       width: 100%;
       padding: 0.8rem 1rem;
-      padding-left: 3rem; /* Space for input icon */
+      padding-left: 3rem;
       font-size: 1rem;
-      border: 1px solid var(--davys-gray);
+      border: 2px solid var(--black);
       border-radius: 1rem;
       background: var(--raisin-black-2);
       color: var(--platinum);
@@ -139,7 +128,6 @@
       appearance: none;
     }
 
-    /* Input Icon Styling */
     .input-icon {
         position: absolute;
         left: 1rem;
@@ -148,14 +136,13 @@
         font-size: 1.1em;
         color: var(--silver);
         pointer-events: none;
-        z-index: 10; /* Ensure icon is above input */
+        z-index: 10;
     }
     .form-group input[type="password"] {
-        padding-right: 3rem; /* Space for eye icon if added */
+        padding-right: 3rem;
     }
-    /* Special styling for select to fix padding when icon is present */
     .form-group select {
-        padding-left: 3rem; /* Same as input for consistency */
+        padding-left: 3rem;
     }
 
     .form-group input::placeholder {
@@ -171,7 +158,6 @@
     }
     
     .form-group select {
-        /* Custom down arrow for select field */
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23C7C2BF" d="M7 10l5 5 5-5z"/></svg>');
         background-repeat: no-repeat;
         background-position: right 1rem center;
@@ -183,7 +169,6 @@
         color: var(--platinum);
     }
 
-    /* Submit Button */
     .btn-submit {
       font-family: 'Playfair Display', serif;
       width: 100%;
@@ -215,7 +200,6 @@
       margin-top: 20px;
     }
 
-    /* Cancel Button/Link */
     .btn-cancel {
       font-family: 'Playfair Display', serif;
       display: inline-flex;
@@ -237,7 +221,6 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.4);
     }
 
-    /* Media Queries for Responsiveness */
     @media (max-width: 480px) {
         .system-title {
             font-size: 2.5rem;
@@ -253,7 +236,7 @@
     }
   </style>
 </head>
-<body style="background: url('<?= base_url() ?>public/background.jpg') no-repeat center center fixed; background-size: cover;">
+<body>
 
   <h1 class="system-title">User Management System</h1>
 

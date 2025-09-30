@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* Color Variables from your style */
     :root {
         --raisin-black: #2D2728ff;
         --van-dyke: #3F3735ff;
@@ -22,29 +21,25 @@
         --raisin-black-2: #282222ff;
         --platinum: #EAE8E5ff;
         --white: #FFFFFFff;
-        /* Custom for Alert/Error */
         --error-red: #9B2C2C;
         --error-bg: rgba(155, 44, 44, 0.2); 
     }
 
-    /* Reset & Base */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
-      /* Using your background style - NOTE: Assuming PHP is properly configured to process base_url() */
       background: url("<?= base_url() ?>public/background.jpg") no-repeat center center fixed;
       background-size: cover;
       color: var(--silver);
       min-height: 100vh;
       display: flex;
-      /* DITO ANG PAGBABAGO: Ginawang column para ma-accommodate ang system title */
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 2rem 1rem; /* Added padding for smaller screens */
+      padding: 2rem 1rem;
       position: relative;
     }
-    /* Dark overlay for background image */
+
     body::before {
       content:'';
       position: fixed;
@@ -53,7 +48,6 @@
       z-index: -1;
     }
 
-    /* --- GLOBAL SYSTEM TITLE STYLE (DINAGDAG ITO) --- */
     .system-title {
         font-family: 'Playfair Display', serif;
         font-size: 2.7rem; 
@@ -63,8 +57,6 @@
         margin-bottom: 1.5rem;
         text-align: center;
     }
-    /* ---------------------------------------------------- */
-
 
     .login-card {
       background: rgba(63,55,53,0.9);
@@ -96,13 +88,12 @@
       justify-content: center;
       gap: 0.7rem; 
     }
-    /* Icon inside the title */
+
     .login-card h2 i {
         color: var(--silver);
         font-size: 1.5rem;
     }
 
-    /* Error Box */
     .error-box-styled {
       background: var(--error-bg);
       color: var(--error-red);
@@ -125,10 +116,10 @@
     .form-group input {
       width: 100%;
       padding: 0.8rem 1rem;
-      padding-left: 3rem; /* Space for input icon */
-      padding-right: 3rem; /* Space for eye icon */
+      padding-left: 3rem;
+      padding-right: 3rem;
       font-size: 1rem;
-      border: 1px solid var(--davys-gray);
+      border: 2px solid var(--black);
       border-radius: 1rem;
       background: var(--raisin-black-2);
       color: var(--platinum);
@@ -147,7 +138,6 @@
       background: var(--jet);
     }
 
-    /* Icon inside the input field */
     .input-icon {
         position: absolute;
         left: 1rem;
@@ -155,7 +145,7 @@
         transform: translateY(-50%);
         font-size: 1.1em;
         color: var(--silver);
-        pointer-events: none; /* Make icon unclickable */
+        pointer-events: none;
     }
 
     .toggle-password {
@@ -172,11 +162,8 @@
         color: var(--platinum);
     }
 
-    /* Login Button */
     .btn-login {
-      /* DITO ANG PAGBABAGO: Idinagdag ang Playfair Display */
       font-family: 'Playfair Display', serif;
-      /* END NG PAGBABAGO */
       width: 100%;
       padding: 0.8rem 1.4rem;
       border: none;
@@ -214,19 +201,14 @@
       text-decoration: none;
       transition: 0.2s;
       margin-left: 0.3rem;
-    }
-    /* DITO ANG PAGBABAGO: Idinagdag ang Playfair Display font sa link text */
-    .group-link a {
       font-family: 'Playfair Display', serif;
     }
-    /* END NG PAGBABAGO */
 
     .group-link a:hover {
       text-decoration: underline;
       color: var(--silver);
     }
 
-    /* Media Query for responsiveness */
     @media (max-width: 480px) {
         .system-title {
             font-size: 2.2rem;

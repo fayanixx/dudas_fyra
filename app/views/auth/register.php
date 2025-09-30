@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* Color Variables from your style */
     :root {
         --raisin-black: #2D2728ff;
         --van-dyke: #3F3735ff;
@@ -22,29 +21,24 @@
         --raisin-black-2: #282222ff;
         --platinum: #EAE8E5ff;
         --white: #FFFFFFff;
-        /* Custom for Alert/Error */
         --error-red: #9B2C2C;
         --error-bg: rgba(155, 44, 44, 0.2);
     }
 
-    /* Reset & Base */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
-      /* Using your background style */
       background: url("<?= base_url() ?>public/background.jpg") no-repeat center center fixed;
       background-size: cover;
       color: var(--silver);
       min-height: 100vh;
       display: flex;
-      /* DITO ANG PAGBABAGO: Ginawang column para ma-accommodate ang system title */
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 2rem 1rem; 
       position: relative;
     }
-    /* Dark overlay for background image */
     body::before {
       content:'';
       position: fixed;
@@ -52,8 +46,7 @@
       background: rgba(45,39,40,0.75);
       z-index: -1;
     }
-
-    /* --- GLOBAL SYSTEM TITLE STYLE (DINAGDAG ITO) --- */
+    
     .system-title {
         font-family: 'Playfair Display', serif;
         font-size: 2.7rem; 
@@ -62,13 +55,9 @@
         text-shadow: 2px 2px 15px rgba(0,0,0,0.8);
         margin-bottom: 1.5rem;
         text-align: center;
-        width: 100%;
-        max-width: 420px;
     }
-    /* ---------------------------------------------------- */
-
+    
     .register-card {
-      /* Using your card style */
       background: rgba(63,55,53,0.9); 
       border-radius: 2rem;
       backdrop-filter: blur(15px);
@@ -85,7 +74,6 @@
     }
 
     .register-card h2 {
-      /* Using your main-title style but smaller */
       font-family: 'Playfair Display', serif;
       font-size: 2.2rem;
       font-weight: 700;
@@ -94,7 +82,6 @@
       margin-bottom: 2rem;
       border-bottom: 2px solid var(--jet);
       padding-bottom: 0.5rem;
-      /* Dinagdag para sa Icon */
       display: flex; 
       align-items: center;
       justify-content: center;
@@ -105,10 +92,7 @@
         font-size: 1.5rem;
     }
 
-
-    /* Error Box */
     .error-box-styled {
-      /* Using your error-box style with darker colors */
       background: var(--error-bg);
       color: var(--error-red);
       padding: 10px;
@@ -116,7 +100,6 @@
       border-radius: 12px;
       margin-bottom: 1.5rem;
       font-size: 0.95em;
-      /* Dinagdag para sa Icon */
       display: flex; 
       align-items: center;
       justify-content: center;
@@ -132,23 +115,20 @@
     .form-group select {
       width: 100%;
       padding: 0.8rem 1rem;
-      /* DITO ANG PAGBABAGO: Idinagdag ang padding-left para sa input icon */
       padding-left: 3rem; 
-      padding-right: 3rem; /* Space for eye icon/dropdown arrow */
+      padding-right: 3rem;
       font-size: 1rem;
-      border: 1px solid var(--davys-gray);
+      border: 1px solid var(--black); 
       border-radius: 1rem;
       background: var(--raisin-black-2);
       color: var(--platinum);
       transition: 0.3s ease;
       box-sizing: border-box;
-      /* Remove default appearance for select for better styling */
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
     }
 
-    /* Input Icon Styling (Para sa kaliwang icon) */
     .input-icon {
         position: absolute;
         left: 1rem;
@@ -156,16 +136,15 @@
         transform: translateY(-50%);
         font-size: 1.1em;
         color: var(--silver);
-        pointer-events: none; /* Make icon unclickable */
+        pointer-events: none;
         z-index: 10;
     }
 
     .form-group select {
-        /* Custom down arrow for select field */
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23C7C2BF" d="M7 10l5 5 5-5z"/></svg>');
         background-repeat: no-repeat;
         background-position: right 1rem center;
-        padding-right: 2.5rem; /* Adjust padding for custom arrow */
+        padding-right: 2.5rem;
     }
 
     .form-group input::placeholder {
@@ -177,11 +156,10 @@
       border-color: var(--silver);
       box-shadow: 0 0 10px rgba(199,194,191,0.2);
       outline: none;
-      background: var(--jet); /* Darker on focus */
+      background: var(--jet);
     }
 
     .form-group select option {
-        /* Styling options for dark mode */
         background: var(--jet);
         color: var(--platinum);
     }
@@ -195,18 +173,14 @@
       font-size: 1.1em;
       color: var(--silver);
       transition: color 0.2s;
-      z-index: 10; /* Ensure eye icon is above input */
+      z-index: 10;
     }
     .toggle-password:hover {
         color: var(--platinum);
     }
 
-    /* Register Button */
     .btn-register {
-      /* DITO ANG PAGBABAGO: Idinagdag ang Playfair Display */
       font-family: 'Playfair Display', serif;
-      /* END NG PAGBABAGO */
-      /* Adapted from your .btn-add style (dark button) */
       width: 100%;
       padding: 0.8rem 1.4rem;
       border: none;
@@ -239,9 +213,7 @@
     }
 
     .group-link a {
-      /* DITO ANG PAGBABAGO: Idinagdag ang Playfair Display font sa link text */
       font-family: 'Playfair Display', serif;
-      /* END NG PAGBABAGO */
       color: var(--platinum);
       font-weight: 500;
       text-decoration: none;
@@ -254,7 +226,6 @@
       color: var(--silver);
     }
 
-    /* Media Query for responsiveness */
     @media (max-width: 480px) {
         .system-title {
             font-size: 2.2rem;
@@ -270,7 +241,7 @@
     }
   </style>
 </head>
-<body style="background: url('<?= base_url() ?>public/background.jpg') no-repeat center center fixed; background-size: cover;">
+<body>
   
   <h1 class="system-title">User Management System</h1>
   

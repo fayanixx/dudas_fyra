@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* Color Variables from your style */
     :root {
         --raisin-black: #2D2728ff;
         --van-dyke: #3F3735ff;
@@ -21,12 +20,10 @@
         --raisin-black-2: #282222ff;
         --platinum: #EAE8E5ff;
         --white: #FFFFFFff;
-        /* Custom for Alert/Error */
         --error-red: #9B2C2C;
         --error-bg: rgba(155, 44, 44, 0.2); 
     }
 
-    /* Reset & Base */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
@@ -41,7 +38,6 @@
       padding: 2rem 0;
       position: relative;
     }
-    /* Dark overlay for background image */
     body::before {
       content:'';
       position: fixed;
@@ -50,7 +46,6 @@
       z-index: -1;
     }
 
-    /* --- GLOBAL SYSTEM TITLE STYLE (KOPYADO SA DASHBOARD) --- */
     .system-title {
         font-family: 'Playfair Display', serif;
         font-size: 2.7rem; 
@@ -60,7 +55,6 @@
         margin-bottom: 1.5rem;
         text-align: center;
     }
-    /* ------------------------------------------------------------------- */
 
     .form-card {
       background: rgba(63,55,53,0.9);
@@ -97,7 +91,6 @@
         font-size: 1.5rem;
     }
 
-    /* --- Error Box Style --- */
     .error-box-styled {
         background: var(--error-bg);
         border: 1px solid var(--error-red);
@@ -122,12 +115,11 @@
     .form-group input,
     .form-group select {
       width: 100%;
-      /* Dito ang pagbabago: idinagdag ang padding-left para sa icon */
       padding: 0.8rem 1rem; 
-      padding-left: 3rem; /* Space for input icon */
-      padding-right: 3rem; /* Space for eye icon/dropdown arrow */
+      padding-left: 3rem;
+      padding-right: 3rem;
       font-size: 1rem;
-      border: 1px solid var(--davys-gray);
+      border: 2px solid var(--black);
       border-radius: 1rem;
       background: var(--raisin-black-2);
       color: var(--platinum);
@@ -138,7 +130,6 @@
       appearance: none;
     }
     
-    /* Input Icon Styling (Para sa kaliwang icon) */
     .input-icon {
         position: absolute;
         left: 1rem;
@@ -163,7 +154,6 @@
     }
     
     .form-group select {
-        /* Custom down arrow for select field */
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23C7C2BF" d="M7 10l5 5 5-5z"/></svg>');
         background-repeat: no-repeat;
         background-position: right 1rem center;
@@ -183,13 +173,12 @@
       font-size: 1.1em;
       color: var(--silver);
       transition: color 0.2s;
-      z-index: 10; /* Ensure eye icon is above input */
+      z-index: 10;
     }
     .toggle-password:hover {
         color: var(--platinum);
     }
 
-    /* Submit Button */
     .btn-submit {
       font-family: 'Playfair Display', serif; 
       width: 100%;
@@ -217,7 +206,6 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.6);
     }
 
-    /* Cancel Button/Link */
     .link-wrapper { margin-top: 20px; }
     .btn-return {
       font-family: 'Playfair Display', serif; 
@@ -240,7 +228,6 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.4);
     }
     
-    /* Media Query for smaller screens */
     @media (max-width: 500px) {
         .system-title {
             font-size: 2.5rem;
@@ -262,7 +249,7 @@
     }
   </style>
 </head>
-<body style="background: url('<?= base_url() ?>public/background.jpg') no-repeat center center fixed; background-size: cover;">
+<body>
 
   <h1 class="system-title">User Management System</h1>
   
@@ -286,7 +273,6 @@
       </div>
 
       <?php 
-        // Logic check if the password field should be included
         $show_password_field = 
             (!empty($logged_in_user) && $logged_in_user['role'] === 'admin') || 
             (!empty($logged_in_user) && $logged_in_user['id'] === $user['id'] && $logged_in_user['role'] !== 'admin');
@@ -312,7 +298,7 @@
           ?>
           <i class="fa-solid fa-key input-icon"></i>
           <input type="password" placeholder="<?= $password_placeholder ?>" 
-                name="password" id="password">
+              name="password" id="password">
           <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
         </div>
       <?php endif; ?>
@@ -334,7 +320,6 @@
         const toggle = document.querySelector(`#${toggleId}`);
         const input = document.querySelector(`#${inputId}`);
 
-        // Only add listener if both elements exist
         if (toggle && input) {
             toggle.addEventListener('click', function () {
                 const type = input.type === 'password' ? 'text' : 'password';
@@ -346,7 +331,6 @@
         }
     }
 
-    // Call the function to set up the toggle for the password field
     toggleVisibility('togglePassword', 'password');
   </script>
 </body>
