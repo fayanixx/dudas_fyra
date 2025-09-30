@@ -24,21 +24,24 @@
         --white: #FFFFFFff;
         /* Custom for Alert/Error */
         --error-red: #9B2C2C;
-        --error-bg: rgba(155, 44, 44, 0.2); /* Semi-transparent red from delete btn */
+        --error-bg: rgba(155, 44, 44, 0.2); 
     }
 
     /* Reset & Base */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
-      /* Using your background style */
+      /* Using your background style - NOTE: Assuming PHP is properly configured to process base_url() */
       background: url("<?= base_url() ?>public/background.jpg") no-repeat center center fixed;
       background-size: cover;
       color: var(--silver);
       min-height: 100vh;
       display: flex;
+      /* DITO ANG PAGBABAGO: Ginawang column para ma-accommodate ang system title */
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 2rem 1rem; /* Added padding for smaller screens */
       position: relative;
     }
     /* Dark overlay for background image */
@@ -50,9 +53,21 @@
       z-index: -1;
     }
 
+    /* --- GLOBAL SYSTEM TITLE STYLE (DINAGDAG ITO) --- */
+    .system-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.7rem; 
+        font-weight: 700;
+        color: var(--platinum);
+        text-shadow: 2px 2px 15px rgba(0,0,0,0.8);
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    /* ---------------------------------------------------- */
+
+
     .login-card {
-      /* Using your card style */
-      background: rgba(63,55,53,0.9); /* Slightly more opaque for focus */
+      background: rgba(63,55,53,0.9);
       border-radius: 2rem;
       backdrop-filter: blur(15px);
       padding: 3rem 2.5rem;
@@ -68,7 +83,6 @@
     }
 
     .login-card h2 {
-      /* Using your main-title style but smaller */
       font-family: 'Playfair Display', serif;
       font-size: 2.2rem;
       font-weight: 700;
@@ -77,11 +91,19 @@
       margin-bottom: 2rem;
       border-bottom: 2px solid var(--jet);
       padding-bottom: 0.5rem;
+      display: flex; 
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem; 
+    }
+    /* Icon inside the title */
+    .login-card h2 i {
+        color: var(--silver);
+        font-size: 1.5rem;
     }
 
     /* Error Box */
     .error-box-styled {
-      /* Using your error-box style with darker colors */
       background: var(--error-bg);
       color: var(--error-red);
       padding: 10px;
@@ -89,6 +111,10 @@
       border-radius: 12px;
       margin-bottom: 1.5rem;
       font-size: 0.95em;
+      display: flex; 
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
     .form-group {
@@ -99,10 +125,11 @@
     .form-group input {
       width: 100%;
       padding: 0.8rem 1rem;
+      padding-left: 3rem; /* Space for input icon */
       padding-right: 3rem; /* Space for eye icon */
       font-size: 1rem;
       border: 1px solid var(--davys-gray);
-      border-radius: 1rem; /* Softer radius */
+      border-radius: 1rem;
       background: var(--raisin-black-2);
       color: var(--platinum);
       transition: 0.3s ease;
@@ -117,7 +144,18 @@
       border-color: var(--silver);
       box-shadow: 0 0 10px rgba(199,194,191,0.2);
       outline: none;
-      background: var(--jet); /* Darker on focus */
+      background: var(--jet);
+    }
+
+    /* Icon inside the input field */
+    .input-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.1em;
+        color: var(--silver);
+        pointer-events: none; /* Make icon unclickable */
     }
 
     .toggle-password {
@@ -136,7 +174,9 @@
 
     /* Login Button */
     .btn-login {
-      /* Adapted from your .btn-add style (dark button) */
+      /* DITO ANG PAGBABAGO: Idinagdag ang Playfair Display */
+      font-family: 'Playfair Display', serif;
+      /* END NG PAGBABAGO */
       width: 100%;
       padding: 0.8rem 1.4rem;
       border: none;
@@ -150,6 +190,10 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.5);
       transition: all 0.25s ease;
       margin-top: 1rem;
+      display: inline-flex; 
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
     .btn-login:hover {
@@ -171,38 +215,65 @@
       transition: 0.2s;
       margin-left: 0.3rem;
     }
+    /* DITO ANG PAGBABAGO: Idinagdag ang Playfair Display font sa link text */
+    .group-link a {
+      font-family: 'Playfair Display', serif;
+    }
+    /* END NG PAGBABAGO */
 
     .group-link a:hover {
       text-decoration: underline;
       color: var(--silver);
     }
+
+    /* Media Query for responsiveness */
+    @media (max-width: 480px) {
+        .system-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        .login-card {
+            padding: 2rem 1.5rem;
+            border-radius: 1.5rem;
+        }
+        .login-card h2 {
+            font-size: 1.8rem;
+        }
+    }
   </style>
 </head>
-<body>
+<body style="background: url('<?= base_url() ?>public/background.jpg') no-repeat center center fixed; background-size: cover;">
+  
+  <h1 class="system-title">User Management System</h1>
+
   <div class="login-card">
-    <h2>System Login</h2>
+    <h2> System Login</h2>
 
     <?php if (!empty($error)): ?>
       <div class="error-box-styled">
-        <?= $error ?>
+        <i class="fa-solid fa-triangle-exclamation"></i> <?= $error ?>
       </div>
     <?php endif; ?>
 
     <form method="post" action="<?= site_url('auth/login') ?>">
       <div class="form-group">
+        <i class="fa-solid fa-user input-icon"></i>
         <input type="text" placeholder="Username" name="username" required>
       </div>
 
       <div class="form-group">
+        <i class="fa-solid fa-key input-icon"></i>
         <input type="password" placeholder="Password" name="password" id="password" required>
         <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
       </div>
 
-      <button type="submit" class="btn-login">Sign In</button>
+      <button type="submit" class="btn-login">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+      </button>
     </form>
 
     <div class="group-link">
-      Don’t have an account? <a href="<?= site_url('auth/register'); ?>">Register here</a>
+      Don’t have an account? <a href="<?= site_url('auth/register'); ?>"><i class="fa-solid fa-user-plus"></i> Register here</a>
     </div>
   </div>
 

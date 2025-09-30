@@ -36,8 +36,9 @@
       color: var(--silver);
       min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: flex-start; /* Start from top, but still allow centering if content is short */
+      flex-direction: column; 
+      justify-content: flex-start;
+      align-items: center;
       padding: 2rem 1rem;
       position: relative;
     }
@@ -49,8 +50,19 @@
       z-index: -1;
     }
 
+    /* --- GLOBAL TITLE STYLE --- */
+    .system-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem; 
+        font-weight: 700;
+        color: var(--platinum);
+        text-shadow: 2px 2px 15px rgba(0,0,0,0.8);
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    /* --- DASHBOARD CONTAINER --- */
     .dashboard-container {
-      /* Using your card style */
       background: rgba(63,55,53,0.85);
       border-radius: 2rem;
       backdrop-filter: blur(15px);
@@ -59,40 +71,76 @@
       max-width: 1200px;
       box-shadow: 0 15px 40px rgba(0,0,0,0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      margin: 0; /* Remove auto margin from original glass-container */
+      margin: 0;
     }
     .dashboard-container:hover {
         transform: translateY(-3px);
         box-shadow: 0 25px 50px rgba(0,0,0,0.6);
     }
 
-    .dashboard-container h2 {
-      /* Using your card-header style but centered and larger */
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      text-align: center;
-      color: var(--white);
-      text-shadow: 1px 1px 10px rgba(0,0,0,0.6);
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(199,194,191,0.3);
-    }
-
-    .top-bar {
+    /* --- TOP BAR: Directory Title (Left) and Action Buttons (Right) --- */
+    .header-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
-      gap: 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--jet);
+      flex-wrap: wrap; 
+      gap: 1rem;
+    }
+    .directory-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+    }
+    .directory-title i {
+        color: var(--silver);
+    }
+    
+    /* Container for Logout and Create User */
+    .header-actions {
+        display: flex;
+        gap: 0.75rem; 
+        flex-wrap: wrap;
+        margin-left: auto; 
     }
 
-    /* Logout Button - Using your btn-logout style */
+    /* Create User Button */
+    .btn-create {
+        background: var(--black) !important;
+        color: var(--white) !important;
+        padding: 0.5rem 1.4rem;
+        font-size: 1rem;
+        border-radius: 1.2rem;
+        font-weight: 500;
+        text-decoration: none;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+        transition: all 0.25s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border: none;
+        /* --- DITO ANG PAGBABAGO --- */
+        font-family: 'Playfair Display', serif;
+        /* --- END NG PAGBABAGO --- */
+    }
+    .btn-create:hover {
+        background: var(--smoky-black) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    }
+
+    /* Logout Button */
     .btn-logout {
       background: var(--error-red);
       color: var(--white);
       padding: 0.5rem 1.4rem;
-      font-size: 1.1rem;
+      font-size: 1rem;
       border-radius: 1.2rem;
       font-weight: 500;
       text-decoration: none;
@@ -103,6 +151,9 @@
       transition: all 0.25s ease;
       border: none;
       cursor: pointer;
+      /* --- DITO ANG PAGBABAGO --- */
+      font-family: 'Playfair Display', serif;
+      /* --- END NG PAGBABAGO --- */
     }
     .btn-logout:hover {
       background: #7B2424;
@@ -110,7 +161,49 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.6);
     }
 
-    /* Search Form - Using your search-form style */
+    /* --- SECOND ROW: Greetings and Search Bar --- */
+    .action-status-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+    
+    /* Welcome/Status Box (Top Left) */
+    .user-status {
+      font-family: 'Playfair Display', serif;
+      background: rgba(63,55,53,0.7);
+      border: 1px solid var(--davys-gray);
+      padding: 10px 15px;
+      border-radius: 12px;
+      display: inline-flex; 
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--silver);
+      font-size: 1em;
+      text-align: left;
+    }
+    .user-status strong {
+      color: var(--platinum);
+      font-weight: 600;
+    }
+    .user-status .username {
+      color: var(--platinum);
+      font-weight: 500;
+    }
+    .user-status .role {
+        font-style: italic;
+        color: var(--silver);
+    }
+    .user-status.error {
+      background: var(--error-bg);
+      border: 1px solid var(--error-red);
+      color: var(--error-red);
+    }
+
+    /* Search Form (Top Right) */
     .search-form {
       display: flex;
       align-items: center;
@@ -118,7 +211,6 @@
       border-radius: 1.2rem;
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-      flex-grow: 1; /* Allow it to take available space */
       max-width: 350px;
     }
     .search-form input {
@@ -141,35 +233,7 @@
     }
     .search-form button:hover { background: var(--jet); }
 
-    /* Welcome/Status Box */
-    .user-status {
-      /* Adjusted to fit the dark theme */
-      background: rgba(63,55,53,0.7);
-      border: 1px solid var(--davys-gray);
-      padding: 10px 15px;
-      border-radius: 12px;
-      display: inline-block;
-      color: var(--silver);
-      font-size: 1em;
-      margin-bottom: 1.5rem;
-      text-align: left;
-    }
-    .user-status strong {
-      color: var(--platinum);
-      font-weight: 600;
-    }
-    .user-status .username {
-      color: var(--platinum);
-      font-weight: 500;
-    }
-    .user-status.error {
-      /* Using your error-box style */
-      background: var(--error-bg);
-      border: 1px solid var(--error-red);
-      color: var(--error-red);
-    }
-
-    /* Table Styles */
+    /* --- TABLE STYLES --- */
     .table-wrapper { overflow-x: auto; max-width: 100%; }
     table {
         width: 100%;
@@ -203,7 +267,7 @@
     }
     td:last-child a { text-decoration:none; }
     
-    /* Action Buttons */
+    /* Action Buttons (with icons) */
     .btn-action {
         padding: 0.4rem 0.9rem;
         border-radius: 1rem;
@@ -219,10 +283,8 @@
         height: 40px;
         font-size: 0.95em;
     }
-    /* Update/Edit Button - Using your btn-edit style */
     .btn-update { background: var(--davys-gray); color: var(--white); }
     .btn-update:hover { background: var(--jet); transform: scale(1.05); }
-    /* Delete Button - Using your btn-delete style */
     .btn-delete { background: var(--error-red); color: var(--white); }
     .btn-delete:hover { background: #7B2424; transform: scale(1.05); }
     
@@ -232,7 +294,7 @@
         font-size: 0.9em;
     }
     
-    /* Pagination - Using your pagination style */
+    /* Pagination */
     .pagination-container { display: flex; justify-content:center; margin:1.5rem 0; }
     .pagination { list-style:none; display:flex; justify-content:center; gap:0.5rem; padding:0; margin:0; }
     .pagination li a, .pagination li span {
@@ -250,81 +312,74 @@
         font-weight:600;
         border: none;
     }
-
-    /* Create User Button - Using your btn-add style */
-    .button-container { text-align: center; margin-top: 1.5rem; }
-    .btn-create {
-        background: var(--black) !important;
-        color: var(--white) !important;
-        padding: 0.7rem 1.8rem;
-        font-size: 1.2rem;
-        border-radius: 1.2rem;
-        font-weight: 500;
-        text-decoration: none;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.5);
-        transition: all 0.25s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        border: none;
-    }
-    .btn-create:hover {
-        background: var(--smoky-black) !important;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.6);
-    }
     
-    /* Media Queries */
+    /* Media Queries for Responsiveness */
     @media (max-width: 768px) {
-      .top-bar {
+      .system-title { font-size: 2.5rem; }
+      .directory-title { font-size: 1.5rem; }
+      
+      .header-bar { 
+          flex-direction: column; 
+          align-items: flex-start; 
+          gap: 1rem; 
+      }
+      .header-actions {
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+          margin-left: 0;
+      }
+      .btn-create, .btn-logout {
+          width: 100%;
+      }
+      
+      .action-status-bar {
         flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
+        align-items: flex-start;
       }
-      .search-form {
-        width: 100%;
-        max-width: 100%;
-      }
-      .user-status {
-          display: block;
-          text-align: center;
-      }
-      .btn-logout {
-          margin-left: auto;
-          margin-right: auto;
-      }
-      .dashboard-container {
-          padding: 1.5rem;
-      }
-      .dashboard-container h2 {
-          font-size: 2rem;
-      }
+      .user-status { width: 100%; text-align: center; justify-content: center; }
+      .search-form { width: 100%; max-width: 100%; }
+      .dashboard-container { padding: 1.5rem; }
     }
   </style>
 </head>
-<body>
+<body style="background: url('<?= base_url() ?>public/background.jpg') no-repeat center center fixed; background-size: cover;">
+
+  <h1 class="system-title">User Management System</h1>
+
   <div class="dashboard-container">
-    <h2>
-      <?= ($logged_in_user['role'] === 'admin') ? 'Admin Dashboard' : 'User Information'; ?>
-    </h2>
-
-    <?php if(!empty($logged_in_user)): ?>
-      <div class="user-status">
-        <strong>Welcome:</strong> 
-        <span class="username"><?= html_escape($logged_in_user['username']); ?></span>
-        (Role: <span class="role"><?= html_escape(ucfirst($logged_in_user['role'])); ?></span>)
-      </div>
-    <?php else: ?>
-      <div class="user-status error">
-        <i class="fa-solid fa-triangle-exclamation"></i> Logged in user not found
-      </div>
-    <?php endif; ?>
-
-    <div class="top-bar">
-      <a href="<?=site_url('auth/logout'); ?>">
-        <button class="btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
-      </a>
+    
+    <div class="header-bar">
+      <h2 class="directory-title">
+        <i class="fa-solid fa-users-viewfinder"></i> User Directory
+      </h2>
       
+      <div class="header-actions">
+        <?php if ($logged_in_user['role'] === 'admin'): ?>
+          <a href="<?=site_url('users/create'); ?>" class="btn-create">
+            <i class="fa-solid fa-user-plus"></i> Create New User
+          </a>
+        <?php endif; ?>
+        <a href="<?=site_url('auth/logout'); ?>" class="btn-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+        </a>
+      </div>
+    </div>
+    
+    <div class="action-status-bar">
+      <?php if(!empty($logged_in_user)): ?>
+        <div class="user-status">
+          <i class="fa-solid fa-hand-sparkles"></i> 
+          <strong>Welcome,</strong> 
+          <span class="username"><?= html_escape($logged_in_user['username']); ?></span>
+          (Role: <span class="role"><?= html_escape(ucfirst($logged_in_user['role'])); ?></span>)
+        </div>
+      <?php else: ?>
+        <div class="user-status error">
+          <i class="fa-solid fa-triangle-exclamation"></i> Logged in user not found
+        </div>
+      <?php endif; ?>
+
       <form action="<?=site_url('users');?>" method="get" class="search-form">
         <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
         <input name="q" type="text" placeholder="Search by name or email..." value="<?=html_escape($q);?>">
@@ -351,7 +406,7 @@
           <?php if (empty($users)): ?>
             <tr>
               <td colspan="<?= ($logged_in_user['role'] === 'admin') ? 5 : 4 ?>" class="empty">
-                  No users found matching the criteria.
+                  <i class="fa-solid fa-circle-info"></i> No users found matching the criteria.
               </td>
             </tr>
           <?php else: ?>
@@ -374,10 +429,10 @@
                 <td>
                     <?php if ($logged_in_user['id'] === $user['id']): ?>
                         <a href="<?=site_url('/users/update/'.$user['id']);?>" class="btn-action btn-update">
-                            <i class="fa-solid fa-pen-to-square"></i> My Profile
+                            <i class="fa-solid fa-circle-user"></i> My Profile
                         </a>
                     <?php else: ?>
-                        <span class="text-muted">View Only</span>
+                        <span class="text-muted"><i class="fa-solid fa-eye-slash"></i> View Only</span>
                     <?php endif; ?>
                 </td>
               <?php endif; ?>
@@ -396,14 +451,7 @@
         ?>
       </ul>
     </div>
-
-    <?php if ($logged_in_user['role'] === 'admin'): ?>
-      <div class="button-container">
-        <a href="<?=site_url('users/create'); ?>" class="btn-create">
-          <i class="fa-solid fa-user-plus"></i> Create New User
-        </a>
-      </div>
-    <?php endif; ?>
+    
   </div>
 </body>
 </html>
