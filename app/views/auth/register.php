@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Update User Profile</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Account</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
@@ -18,11 +18,13 @@
         --davys-gray: #5F5957ff;
         --black: #040202ff;
         --smoky-black: #0F0C0Cff;
+        --licorice: #1F1A1Aff;
         --raisin-black-2: #282222ff;
         --platinum: #EAE8E5ff;
         --white: #FFFFFFff;
         /* Custom for Alert/Error */
         --error-red: #9B2C2C;
+        --error-bg: rgba(155, 44, 44, 0.2);
     }
 
     /* Reset & Base */
@@ -37,7 +39,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 2rem 0;
+      padding: 2rem 0; /* Add padding for smaller screens if content is tall */
       position: relative;
     }
     /* Dark overlay for background image */
@@ -49,24 +51,24 @@
       z-index: -1;
     }
 
-    .form-card {
+    .register-card {
       /* Using your card style */
-      background: rgba(63,55,53,0.9);
+      background: rgba(63,55,53,0.9); /* Slightly more opaque for focus */
       border-radius: 2rem;
       backdrop-filter: blur(15px);
       padding: 3rem 2.5rem;
       width: 100%;
-      max-width: 450px;
+      max-width: 420px;
       box-shadow: 0 15px 40px rgba(0,0,0,0.5);
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .form-card:hover {
+    .register-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 25px 50px rgba(0,0,0,0.6);
     }
 
-    .form-card h1 {
+    .register-card h2 {
       /* Using your main-title style but smaller */
       font-family: 'Playfair Display', serif;
       font-size: 2.2rem;
@@ -78,10 +80,21 @@
       padding-bottom: 0.5rem;
     }
 
+    /* Error Box */
+    .error-box-styled {
+      /* Using your error-box style with darker colors */
+      background: var(--error-bg);
+      color: var(--error-red);
+      padding: 10px;
+      border: 1px solid var(--error-red);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      font-size: 0.95em;
+    }
+
     .form-group {
-      margin-bottom: 1.2rem;
-      text-align: left;
       position: relative;
+      margin-bottom: 1.2rem;
     }
 
     .form-group input,
@@ -96,9 +109,18 @@
       color: var(--platinum);
       transition: 0.3s ease;
       box-sizing: border-box;
+      /* Remove default appearance for select for better styling */
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
+    }
+
+    .form-group select {
+        /* Custom down arrow for select field */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23C7C2BF" d="M7 10l5 5 5-5z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        padding-right: 2.5rem; /* Adjust padding for custom arrow */
     }
 
     .form-group input::placeholder {
@@ -110,15 +132,7 @@
       border-color: var(--silver);
       box-shadow: 0 0 10px rgba(199,194,191,0.2);
       outline: none;
-      background: var(--jet);
-    }
-    
-    .form-group select {
-        /* Custom down arrow for select field */
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23C7C2BF" d="M7 10l5 5 5-5z"/></svg>');
-        background-repeat: no-repeat;
-        background-position: right 1rem center;
-        padding-right: 2.5rem;
+      background: var(--jet); /* Darker on focus */
     }
 
     .form-group select option {
@@ -126,7 +140,7 @@
         background: var(--jet);
         color: var(--platinum);
     }
-
+    
     .toggle-password {
       position: absolute;
       right: 1rem;
@@ -141,8 +155,9 @@
         color: var(--platinum);
     }
 
-    /* Submit Button - Using your btn-add style */
-    .btn-submit {
+    /* Register Button */
+    .btn-register {
+      /* Adapted from your .btn-add style (dark button) */
       width: 100%;
       padding: 0.8rem 1.4rem;
       border: none;
@@ -156,112 +171,97 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.5);
       transition: all 0.25s ease;
       margin-top: 1rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
     }
 
-    .btn-submit:hover {
+    .btn-register:hover {
       background: var(--smoky-black) !important;
       transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.6);
     }
 
-    /* Cancel Button/Link - Using your btn-edit style */
-    .link-wrapper { margin-top: 20px; }
-    .btn-return {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.4rem;
-      background: var(--davys-gray);
-      color: var(--white);
-      border-radius: 1.2rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.25s ease;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    .group-link {
+      margin-top: 1.5rem;
+      font-size: 0.9em;
+      color: var(--silver);
     }
 
-    .btn-return:hover {
-      background: var(--jet);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    .group-link a {
+      color: var(--platinum);
+      font-weight: 500;
+      text-decoration: none;
+      transition: 0.2s;
+      margin-left: 0.3rem;
+    }
+
+    .group-link a:hover {
+      text-decoration: underline;
+      color: var(--silver);
     }
   </style>
 </head>
 <body>
-  <div class="form-card">
-    <h1>Update User Info</h1>
+  <div class="register-card">
+    <h2>Create Account</h2>
     
     <?php if (!empty($error)): ?>
-        <div class="error-box-styled">
-            <i class="fa-solid fa-triangle-exclamation"></i> <?= $error ?>
-        </div>
+      <div class="error-box-styled">
+        <?= $error ?>
+      </div>
     <?php endif; ?>
-
-    <form action="<?=site_url('users/update/'.$user['id'])?>" method="POST">
-      <div class="form-group">
-        <input type="text" name="username" value="<?=html_escape($user['username']);?>" placeholder="Username" required>
-      </div>
-      <div class="form-group">
-        <input type="email" name="email" value="<?=html_escape($user['email']);?>" placeholder="Email" required>
-      </div>
-
-      <?php if(!empty($logged_in_user) && $logged_in_user['role'] === 'admin'): ?>
-        <div class="form-group">
-          <select name="role" required>
-            <option value="user" <?= $user['role'] === 'user' ? 'selected' : ''; ?>>User</option>
-            <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <input type="password" placeholder="New Password (leave blank if unchanged)" 
-                name="password" id="password">
-          <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
-        </div>
-      <?php endif; ?>
-      
-      <?php if(!empty($logged_in_user) && $logged_in_user['id'] === $user['id'] && $logged_in_user['role'] !== 'admin'): ?>
-         <div class="form-group">
-          <input type="password" placeholder="New Password (required to change)" 
-                name="password" id="password">
-          <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
-        </div>
-      <?php endif; ?>
-
-      <button type="submit" class="btn-submit">
-        <i class="fa-solid fa-cloud-arrow-up"></i> Save Changes
-      </button>
-    </form>
     
-    <div class="link-wrapper">
-      <a href="<?=site_url('/users');?>" class="btn-return">
-        <i class="fa-solid fa-arrow-left"></i> Cancel
-      </a>
+    <form method="POST" action="<?= site_url('auth/register'); ?>">
+      
+      <div class="form-group">
+        <input type="text" name="username" placeholder="Username" required>
+      </div>
+
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Email" required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required>
+        <i class="fa-solid fa-eye toggle-password" id="toggleConfirmPassword"></i>
+      </div>
+
+      <div class="form-group">
+        <select name="role" required class="form-select-styled"> 
+          <option value="" disabled selected>Select Role</option> <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-register">Register</button>
+    </form>
+
+    <div class="group-link">
+      Already have an account? <a href="<?= site_url('auth/login'); ?>">Login here</a>
     </div>
   </div>
-
+  
   <script>
     function toggleVisibility(toggleId, inputId) {
-        const toggle = document.querySelector(`#${toggleId}`);
-        const input = document.querySelector(`#${inputId}`);
+      const toggle = document.getElementById(toggleId);
+      const input = document.getElementById(inputId);
 
-        if (toggle && input) {
-            toggle.addEventListener('click', function () {
-                const type = input.type === 'password' ? 'text' : 'password';
-                input.type = type;
+      if (toggle && input) {
+          toggle.addEventListener('click', function () {
+            const type = input.type === 'password' ? 'text' : 'password';
+            input.type = type;
 
-                this.classList.toggle('fa-eye');
-                this.classList.toggle('fa-eye-slash');
-            });
-        }
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+          });
+      }
     }
 
-    // Only activate if the password field is present (for Admin or self-update)
     toggleVisibility('togglePassword', 'password');
+    toggleVisibility('toggleConfirmPassword', 'confirmPassword');
   </script>
 </body>
 </html>
