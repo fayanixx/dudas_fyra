@@ -229,7 +229,7 @@
   <h1 class="system-title">User Management System</h1>
 
   <div class="login-card">
-    <h2> System Login</h2>
+    <h2><i class="fa-solid fa-lock"></i>System Login</h2>
 
     <?php if (!empty($error)): ?>
       <div class="error-box-styled">
