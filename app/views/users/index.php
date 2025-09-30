@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Users Management Dashboard</title>
+  <title>Users Management System</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
@@ -362,7 +362,7 @@
 
       <form action="<?=site_url('users');?>" method="get" class="search-form">
         <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
-        <input name="q" type="text" placeholder="Search by name or email..." value="<?=html_escape($q);?>">
+        <input name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button> 
       </form>
     </div>

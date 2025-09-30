@@ -293,8 +293,8 @@
           <?php 
             $password_placeholder = 
                 (!empty($logged_in_user) && $logged_in_user['role'] === 'admin' && $logged_in_user['id'] !== $user['id']) 
-                ? 'New Password (leave blank if unchanged)'
-                : 'New Password (leave blank if unchanged)'; 
+                ? 'New Password'
+                : 'New Password'; 
           ?>
           <i class="fa-solid fa-key input-icon"></i>
           <input type="password" placeholder="<?= $password_placeholder ?>" 
